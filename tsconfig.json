@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "strict": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "types": [
+      "jest",
+      "node"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "outDir": "es",
+    "declaration": true,
+    "declarationDir": "es",
+  },
+  "include": [
+    "src",
+  ],
+  "exclude": [
+    "node_modules",
+    "es",
+    "src/**/__test__",
+  ]
+}
