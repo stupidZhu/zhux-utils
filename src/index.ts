@@ -1,3 +1,5 @@
+export { default as CacheUtil } from "./widget/CacheUtil/CacheUtil"
+export { default as FormatUtil } from "./widget/FormatUtil/FormatUtil"
 export { default as IObjStore } from "./widget/IObjStore/IObjStore"
 export { default as RefPromiseUtil } from "./widget/RefPromiseUtil/RefPromiseUtil"
 export { default as StorageUtil } from "./widget/StorageUtil/StorageUtil"
