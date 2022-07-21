@@ -1,9 +1,12 @@
 {
-  "name": "zhux-utils-utils",
-  "version": "0.0.1",
+  "name": "zhux-utils",
+  "version": "0.1.15",
   "description": "",
   "module": "es/index.js",
   "types": "es/index.d.ts",
+  "files": [
+    "es"
+  ],
   "scripts": {
     "build": "rollup -c && tsc",
     "test": "jest",
