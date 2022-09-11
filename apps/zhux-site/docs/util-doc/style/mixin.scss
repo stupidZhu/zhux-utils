@@ -1,0 +1,16 @@
+@mixin flex($d: row, $j: center, $a: center, $w: nowrap, $g: 0) {
+  display: flex;
+  flex-direction: $d;
+  flex-wrap: $w;
+  gap: $g;
+  align-items: $a;
+  justify-content: $j;
+}
+@mixin ellipsis($line: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+}

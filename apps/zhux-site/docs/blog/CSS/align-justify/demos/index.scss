@@ -1,0 +1,43 @@
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  .radio-item {
+    > label {
+      cursor: pointer;
+    }
+  }
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: rgba(#000, 0.05);
+  .flex-item {
+    flex: 0 0 22%;
+    background-color: rgba(pink, 0.5);
+  }
+  .flex-item-1 {
+    background-color: rgba(green, 0.5);
+  }
+  /*
+  
+  
+  */
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 10px;
+  background-color: rgba(#000, 0.05);
+  .grid-item {
+    background-color: rgba(pink, 0.5);
+  }
+  .grid-item-1 {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(pink, 0.5);
+  }
+}

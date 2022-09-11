@@ -1,7 +1,27 @@
-export default {
-  extends: ["next", "turbo", "prettier"],
+module.exports = {
+  parserOptions: {
+    ecmaVersion: 8,
+    sourceType: "module",
+  },
+  extends: ["turbo", "prettier", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
+  env: { browser: true, es6: true, jest: true, node: true },
   rules: {
-    "@next/next/no-html-link-for-pages": "off",
-    "react/jsx-key": "off",
+    semi: "off",
+    quotes: ["warn", "double"],
+    "no-empty": "off",
+    "no-debugger": "off",
+    "no-prototype-builtins": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-extra-semi": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/triple-slash-reference": "off",
   },
 }

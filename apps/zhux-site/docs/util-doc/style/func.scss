@@ -1,0 +1,7 @@
+@use "sass:math";
+@function vw($px) {
+  @return math.div(100, 1920) * $px + vw;
+}
+@function vh($px) {
+  @return math.div(100, 1080) * $px + vh;
+}

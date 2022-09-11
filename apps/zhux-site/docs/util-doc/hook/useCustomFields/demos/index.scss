@@ -1,0 +1,27 @@
+.custom-fields-demo {
+  .field-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    // align-items: flex-end;
+    > select {
+      height: 40px;
+    }
+    > input {
+      box-sizing: border-box;
+      width: 150px;
+      height: 40px;
+      outline: none;
+    }
+    > button {
+      height: 40px;
+    }
+    .img-picker-wrapper {
+      min-width: 150px;
+    }
+  }
+  > button {
+    height: 30px;
+    margin-right: 10px;
+  }
+}
