@@ -2,7 +2,7 @@
   "private": true,
   "name": "zhux-site",
   "scripts": {
-    "start": "dumi dev",
+    "dev": "dumi dev",
     "build": "dumi build"
   },
   "devDependencies": {
@@ -15,7 +15,8 @@
     "prettier": "^2.2.1",
     "yorkie": "^2.0.0",
     "eslint": "^8.20.0",
-    "eslint-config-custom": "workspace:*"
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*"
   },
   "dependencies": {
     "ahooks": "^3.7.0",

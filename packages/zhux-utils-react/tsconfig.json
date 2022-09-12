@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/react-library.json",
+  "extends": "tsconfig/react.json",
   "compilerOptions": {
     "outDir": "dist",
     "declarationDir": "dist"
@@ -10,5 +10,6 @@
   "exclude": [
     "dist",
     "src/**/__test__",
+    "src/style"
   ]
 }

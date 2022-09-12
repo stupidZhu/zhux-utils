@@ -1,0 +1,20 @@
+{
+  "extends": "tsconfig/react.json",
+  "compilerOptions": {
+    "useDefineForClassFields": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": [
+      "node"
+    ],
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
