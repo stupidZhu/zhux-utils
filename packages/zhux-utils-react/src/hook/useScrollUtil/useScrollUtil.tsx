@@ -188,25 +188,29 @@ const useScrollUtil = (props: UseScrollUtilProps) => {
   const onMouseEnter = useCallback(() => (hoverFlag.current = true), [])
   const onMouseLeave = useCallback(() => (hoverFlag.current = false), [])
 
-  useWatchRefEffect((el, prevEl) => {
-    if (el) {
-      el.style.overflow = "auto"
-      el.addEventListener("scroll", handleScroll)
-      el.addEventListener("mouseenter", onMouseEnter)
-      el.addEventListener("mouseleave", onMouseLeave)
-      el.addEventListener("touchstart", onMouseEnter)
-      el.addEventListener("touchend", onMouseLeave)
-      el.addEventListener("touchcancel", onMouseLeave)
-    }
-    if (prevEl) {
-      prevEl.removeEventListener("scroll", handleScroll)
-      prevEl.removeEventListener("mouseenter", onMouseEnter)
-      prevEl.removeEventListener("mouseleave", onMouseLeave)
-      prevEl.removeEventListener("touchstart", onMouseEnter)
-      prevEl.removeEventListener("touchend", onMouseLeave)
-      prevEl.removeEventListener("touchcancel", onMouseLeave)
-    }
-  }, scrollDom)
+  useWatchRefEffect(
+    (el, prevEl) => {
+      if (el) {
+        el.style.overflow = "auto"
+        el.addEventListener("scroll", handleScroll)
+        el.addEventListener("mouseenter", onMouseEnter)
+        el.addEventListener("mouseleave", onMouseLeave)
+        el.addEventListener("touchstart", onMouseEnter)
+        el.addEventListener("touchend", onMouseLeave)
+        el.addEventListener("touchcancel", onMouseLeave)
+      }
+      if (prevEl) {
+        prevEl.removeEventListener("scroll", handleScroll)
+        prevEl.removeEventListener("mouseenter", onMouseEnter)
+        prevEl.removeEventListener("mouseleave", onMouseLeave)
+        prevEl.removeEventListener("touchstart", onMouseEnter)
+        prevEl.removeEventListener("touchend", onMouseLeave)
+        prevEl.removeEventListener("touchcancel", onMouseLeave)
+      }
+    },
+    scrollDom,
+    true
+  )
   useEffect(() => {
     return () => {
       timerRef.current && clearInterval(timerRef.current)

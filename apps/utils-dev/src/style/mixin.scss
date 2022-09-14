@@ -1,0 +1,47 @@
+// 注意 gap 可能存在兼容性问题
+@mixin flex($j: center, $a: center, $d: null, $w: null, $g: null) {
+  display: flex;
+  align-items: $a;
+  justify-content: $j;
+  @if $d {
+    flex-direction: $d;
+  }
+  @if $w {
+    flex-wrap: $w;
+  }
+  @if $g {
+    gap: $g;
+  }
+}
+@mixin ellipsis($line: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+@mixin commonScrollBar($w: 5px, $h: 5px) {
+  &::-webkit-scrollbar {
+    width: $w;
+    height: $h;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba($theme-light-cyan, 0.6);
+    /* 滚动条里面小方块 */
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 20%);
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+    /* 滚动条里面轨道 */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 20%);
+  }
+}
+@mixin commonBox($br: vw(8), $bg: rgba($theme-deep-blue, 0.7), $bc: rgba($theme-cyan, 0.5)) {
+  border: 1px solid $bc;
+  backdrop-filter: blur(vw(10));
+  background: $bg;
+  border-radius: $br;
+}

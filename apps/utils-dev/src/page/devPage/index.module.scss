@@ -1,0 +1,21 @@
+@import "src/style";
+
+.customField {
+  .fieldItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid transparent;
+    pointer-events: none;
+    &.editing {
+      border-color: rgba($theme-green, 0.5);
+      pointer-events: auto;
+    }
+    :global {
+      .iconfont {
+        cursor: pointer;
+      }
+    }
+  }
+}

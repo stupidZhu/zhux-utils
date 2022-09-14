@@ -1,0 +1,59 @@
+@import "src/style";
+.myDialog {
+  position: fixed;
+  z-index: 900;
+  background-color: lighten($theme-deep-blue, 5);
+  box-shadow: 2px 2px 4px rgba(#000, 0.1);
+
+  &.small {
+    top: 30vh;
+    left: calc(50% - 15vw);
+    width: 30vw;
+    min-height: 30vh;
+  }
+  &.middle {
+    top: 20vh;
+    left: calc(50% - 22vw);
+    width: 45vw;
+    min-height: 45vh;
+  }
+  &.large {
+    top: 10vh;
+    left: calc(50% - 30vw);
+    overflow: auto;
+    width: 60vw;
+    min-height: 60vh;
+  }
+  &.micro {
+    top: 35vh;
+    left: calc(50% - 10vw);
+    width: 20vw;
+    min-height: 20vh;
+  }
+  .dialogTitle {
+    background-color: rgba(#fff, 0.9);
+    height: vh(38);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 vw(10);
+    > i {
+      position: relative;
+      z-index: 10;
+      cursor: pointer;
+    }
+  }
+  .moveField {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: vh(38);
+    cursor: move;
+  }
+  .childrenWrapper {
+    padding: vh(10) vw(20) vh(20);
+    color: rgba(#fff, 0.8);
+  }
+}

@@ -1,0 +1,15 @@
+@use "sass:math";
+@function vw($px) {
+  // $vw: math.div(100, 1920) * $px + vw;
+  // $min: $px * 0.9 + px;
+  // $max: $px * 4 + px;
+  // @return clamp($min, $vw, $max);
+  @return math.div(100, 1920) * $px + vw;
+}
+@function vh($px) {
+  // $vh: math.div(100, 1080) * $px + vh;
+  // $min: $px * 0.9 + px;
+  // $max: $px * 4 + px;
+  // @return clamp($min, $vh, $max);
+  @return math.div(100, 1080) * $px + vh;
+}

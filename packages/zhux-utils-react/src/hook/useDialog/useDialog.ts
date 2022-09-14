@@ -54,6 +54,16 @@ const useDialog = (props: UseDialogProps) => {
 
   const stateRef = useRef<{ isMoving: boolean; isResizing: boolean }>({ isMoving: false, isResizing: false })
 
+  const getDialogInfo = useCallback(() => getCurrent(dialogRef)?.getBoundingClientRect(), [dialogRef])
+  const setDialogInfo = useCallback(
+    (props: { top?: string; left?: string; width?: string; height?: string }) => {
+      const dialog = getCurrent(dialogRef)
+      if (!dialog) return
+      Object.entries(props).forEach(([k, v]) => (dialog.style[k] = v))
+    },
+    [dialogRef]
+  )
+
   const moveFunc = useCallback(
     (e: Event) => {
       const box = getCurrent(dialogRef)
@@ -155,15 +165,23 @@ const useDialog = (props: UseDialogProps) => {
     [dialogRef, minHeight, minWidth, resizeCb]
   )
 
-  useWatchRefEffect((el, prevEl) => {
-    el?.addEventListener("mousedown", moveFunc)
-    prevEl?.removeEventListener("mousedown", moveFunc)
-  }, moveFieldRef)
+  useWatchRefEffect(
+    (el, prevEl) => {
+      el?.addEventListener("mousedown", moveFunc)
+      prevEl?.removeEventListener("mousedown", moveFunc)
+    },
+    moveFieldRef,
+    true
+  )
 
-  useWatchRefEffect((el, prevEl) => {
-    el?.addEventListener("mousedown", resizeFunc)
-    prevEl?.removeEventListener("mousedown", resizeFunc)
-  }, resizeFieldRef)
+  useWatchRefEffect(
+    (el, prevEl) => {
+      el?.addEventListener("mousedown", resizeFunc)
+      prevEl?.removeEventListener("mousedown", resizeFunc)
+    },
+    resizeFieldRef,
+    true
+  )
 
   useEffect(() => {
     const dialog = getCurrent(dialogRef)
@@ -176,7 +194,7 @@ const useDialog = (props: UseDialogProps) => {
     return () => delKey?.(key)
   }, [])
 
-  return stateRef.current
+  return { ...stateRef.current, getDialogInfo, setDialogInfo }
 }
 
 export default useDialog
