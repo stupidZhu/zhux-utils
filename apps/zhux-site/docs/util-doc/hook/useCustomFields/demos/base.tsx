@@ -1,52 +1,88 @@
 /**
  * title: 基础用法
+ * desc: 实现一个新增用户的 demo
  */
-import React, { HTMLInputTypeAttribute } from "react"
+
+import classNames from "classnames"
+import React, { useState } from "react"
 import { useCustomFields } from "zhux-utils-react"
+import { CommonComProps } from "zhux-utils-react/dist/type"
+import { IKey } from "zhux-utils/dist/type"
 import "./index.scss"
 
-const BaseCom = () => {
-  const { fields, changeField, getFormatRes, checkNull } = useCustomFields({ defaultType: "number" })
+export type FieldItem = { name: string; age?: number; gender?: number }
+
+const checkFields = (fields: Array<FieldItem & { _key: IKey }>) => {
+  let key: IKey | undefined = undefined
+  for (const i of fields) {
+    if (!i.name || typeof i.age === "undefined" || typeof i.age === "undefined") {
+      key = i._key
+      break
+    }
+  }
+  return key
+}
+
+type BaseDemoProps = Omit<CommonComProps<Array<FieldItem & { _key: IKey }>>, "className" | "style">
+
+const BaseDemo: React.FC<BaseDemoProps> = props => {
+  const [fields, changeFields] = useCustomFields<FieldItem>({ templateItem: { name: "", gender: 2 }, ...props })
+  const [editKey, setEditKey] = useState<IKey>("")
 
   return (
     <div className="custom-fields-demo">
-      {fields.map((item, index) => {
+      {fields.map(item => {
         return (
-          <div className="field-item" key={item.id}>
-            <select value={item.type} onChange={e => changeField("type", index, e.target.value)}>
-              <option value="text">文本</option>
-              <option value="number">数值</option>
-              <option value="password">密码</option>
+          <div className={classNames("field-item", { editing: editKey === item._key })} key={item._key}>
+            <input
+              value={item.name}
+              onChange={e => changeFields("edit", { ...item, name: e.target.value })}
+              placeholder="名字"
+            />
+            <input
+              type="number"
+              value={item.age}
+              onChange={e => changeFields("edit", { ...item, age: +e.target.value })}
+              placeholder="年龄"
+            />
+            <select value={item.gender} onChange={e => changeFields("edit", { ...item, gender: +e.target.value })}>
+              <option value={0}>女</option>
+              <option value={1}>男</option>
+              <option value={2}>保密</option>
             </select>
-            <input
-              type="text"
-              value={item.label}
-              onChange={e => changeField("label", index, e.target.value)}
-              placeholder="请输入属性名"
-            />
-            <input
-              type={item.type as HTMLInputTypeAttribute}
-              value={item.value}
-              onChange={e => changeField("value", index, e.target.value)}
-              placeholder="请输入属性值"
-            />
-            <button onClick={() => changeField("del", index)}>删除</button>
+            {editKey === item._key ? (
+              <i className="iconfont pop-iconsave-fill" onClick={() => setEditKey("")} />
+            ) : (
+              <>
+                <i
+                  className="iconfont pop-iconedit-fill"
+                  onClick={() => setEditKey(item._key)}
+                  style={{ pointerEvents: "auto" }}
+                />
+                <i className="iconfont pop-icondelete-fill" onClick={() => changeFields("del", item)} />
+              </>
+            )}
           </div>
         )
       })}
       <hr />
-      <button onClick={() => changeField("add")}>新增</button>
-      <button onClick={() => console.log(getFormatRes())}>打印结果</button>
       <button
+        disabled={!!editKey}
         onClick={() => {
-          const { flag, index, propName } = checkNull()
-          if (flag) alert(`第${index + 1}项${propName}为空！`)
+          const key = checkFields(fields)
+          if (key) {
+            alert("请完成前一个")
+            setEditKey(key)
+            return
+          }
+          setEditKey(changeFields("add")!)
         }}
       >
-        校验field
+        add
       </button>
+      <button onClick={() => console.log(fields)}>print</button>
     </div>
   )
 }
 
-export default BaseCom
+export default BaseDemo

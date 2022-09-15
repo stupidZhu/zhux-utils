@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stupidZhu/zhux-utils-react"
+    "url": "https://github.com/stupidZhu/zhux-utils/tree/main/packages/zhux-utils-react"
   },
   "files": [
     "dist"

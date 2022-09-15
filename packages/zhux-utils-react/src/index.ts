@@ -3,7 +3,6 @@ export { default as useOnceEffect } from "./hook/effects/useOnceEffect/useOnceEf
 export { useWatchEffect, useWatchRefEffect } from "./hook/effects/useWatchEffect/useWatchEffect"
 export { default as useCtrlComponent } from "./hook/useCtrlComponent/useCtrlComponent"
 export { default as useCustomFields } from "./hook/useCustomFields/useCustomFields"
-export { default as useCustomFieldsP } from "./hook/useCustomFields/useCustomFieldsP"
 export { default as useDateTime } from "./hook/useDateTime/useDateTime"
 export { default as useDialog } from "./hook/useDialog/useDialog"
 export { default as useMemoValue } from "./hook/useMemoValue/useMemoValue"

@@ -1,75 +1,51 @@
 import { cloneDeep } from "lodash"
-import React, { useCallback } from "react"
-import { IObj } from "zhux-utils/dist/type"
+import { useCallback } from "react"
+import { IKey, IObj } from "zhux-utils/dist/type"
+import { CommonComProps } from "../../type"
 import useCtrlComponent from "../useCtrlComponent/useCtrlComponent"
+import useMemoValue from "../useMemoValue/useMemoValue"
 
-export type CustomFieldItem = { type?: React.Key; id: React.Key; label: React.Key; value: any } & IObj
-export type ChangeFieldFunc = (changeType: "value" | "label" | "type" | "del" | "add", index?: number, value?: any) => void
-type CheckNullFunc = (properties?: Array<keyof CustomFieldItem>) => {
-  flag: boolean
-  propName: keyof CustomFieldItem | ""
-  index: number
+export type ChangeFieldFunc<T = any> = (changeType: "edit" | "del" | "add", value?: T & { _key?: IKey }) => IKey | undefined
+
+interface UseCustomFieldsProps<T extends IObj>
+  extends Omit<CommonComProps<Array<T & { _key: IKey }>>, "className" | "style"> {
+  templateItem: T
+  addType?: "push" | "unshift"
 }
 
-export interface UseCustomFieldsOptions {
-  value?: CustomFieldItem[]
-  defaultValue?: CustomFieldItem[]
-  defaultType?: React.Key
-  onChange?: (fields: CustomFieldItem[]) => void
-  formatter?: (field: CustomFieldItem) => any
-}
+const useCustomFields = <T extends IObj = any>(props: UseCustomFieldsProps<T>) => {
+  const { templateItem: item, addType = "push" } = props
+  const [fields, setFields] = useCtrlComponent<Array<T & { _key: IKey }>>(props, { defaultValue: [] })
 
-const useCustomFields = (options: UseCustomFieldsOptions = {}) => {
-  const { defaultType, formatter } = options
-  const [fields, setFields] = useCtrlComponent<CustomFieldItem[]>(options, { defaultValue: [] })
+  const templateItem = useMemoValue(item)
 
-  const changeField: ChangeFieldFunc = useCallback(
-    (changeType, index = -1, value) => {
+  const changeField: ChangeFieldFunc<T> = useCallback(
+    (changeType, value) => {
       const _fields = [...fields]
-      if (changeType === "del") _fields.splice(index, 1)
-      else if (changeType === "add") {
-        _fields.push({ label: "", value: undefined, type: defaultType, id: Date.now() + Math.random() })
+      let key: IKey | undefined = undefined
+
+      if (changeType === "add") {
+        const v: any = value ?? cloneDeep(templateItem)
+        if (!v._key) v._key = Date.now() + Math.random()
+        _fields[addType](v)
+        key = v._key
       } else {
-        const item = _fields[index]
-        if (item) item[changeType] = value
-        if (changeType === "type") item.value = undefined
+        if (!value?._key) return
+        const index = _fields.findIndex(item => item._key === value._key)
+        if (index === -1) return
+
+        if (changeType === "del") _fields.splice(index, 1)
+        else _fields[index] = value as T & { _key: IKey }
+
+        key = value._key
       }
       setFields(_fields)
+      return key
     },
-    [defaultType, fields, setFields]
+    [addType, fields, templateItem]
   )
 
-  const checkNull: CheckNullFunc = useCallback(
-    (properties = ["type", "label", "value"]) => {
-      let flag = false,
-        propName: keyof CustomFieldItem | "" = "",
-        index = -1
-
-      for (let i = 0; i < fields.length; i++) {
-        for (let j = 0; j < properties.length; j++) {
-          const item = fields[i][properties[j]]
-          if (typeof item === "undefined" || item == null || item === "") {
-            flag = true
-            propName = properties[j]
-            index = i
-            break
-          }
-        }
-        if (flag) break
-      }
-
-      return { flag, propName, index }
-    },
-    [fields]
-  )
-
-  const getFormatRes = useCallback(() => {
-    const _fields = cloneDeep(fields)
-    if (!formatter) return _fields
-    return _fields.map(formatter)
-  }, [fields, formatter])
-
-  return { fields, changeField, getFormatRes, checkNull }
+  return [fields, changeField] as const
 }
 
 export default useCustomFields

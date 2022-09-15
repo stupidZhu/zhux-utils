@@ -1,27 +1,42 @@
+@import "docs/util-doc/style";
 .custom-fields-demo {
   .field-item {
     display: flex;
     gap: 10px;
-    margin-bottom: 10px;
-    // align-items: flex-end;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid transparent;
+    pointer-events: none;
+    &.editing {
+      border-color: rgba($theme-green, 0.5);
+      pointer-events: auto;
+    }
     > select {
-      height: 40px;
+      height: 30px;
+      padding: 0 10px;
     }
     > input {
       box-sizing: border-box;
       width: 150px;
-      height: 40px;
+      height: 30px;
       outline: none;
     }
     > button {
-      height: 40px;
+      height: 30px;
     }
-    .img-picker-wrapper {
-      min-width: 150px;
+    > i {
+      font-size: 1.5em;
+      cursor: pointer;
+      pointer-events: auto;
+      color: #666;
+      &:hover {
+        color: $theme-blue;
+      }
     }
   }
   > button {
     height: 30px;
+    padding: 0 30px;
     margin-right: 10px;
   }
 }

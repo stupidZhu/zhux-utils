@@ -11,7 +11,7 @@ export default defineConfig({
     { title: "Blog", path: "/blog" },
     { title: "GitHub", path: "https://github.com/stupidZhu" },
   ],
-  styles: ["http://file.zhux.cc/zhux-site/common.css"],
+  styles: ["http://file.zhux.cc/zhux-site/common.css", "//at.alicdn.com/t/font_2346762_78tfqsq57sm.css"],
   alias: {
     "dumi-theme-some": path.resolve("./node_modules/dumi-theme-some"),
   },
