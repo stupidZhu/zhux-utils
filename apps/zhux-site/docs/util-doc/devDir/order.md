@@ -11,7 +11,7 @@ hide: true
 | useWatchEffect     | 100   |
 | useOnceEffect      | 200   |
 | useDateTime        | 300   |
-| useMemoValue       | 400   |
+| useAsyncMemo       | 400   |
 | useStoreState      | 500   |
 | useStorageState    | 600   |
 | useCtrlComponent   | 700   |

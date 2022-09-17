@@ -4,7 +4,6 @@ class CacheHelper {
   private store: IObj = {}
 
   add = <T>(key: string, value: T): T => {
-    console.log("hello world!!!")
     this.store[key] = value
     return value
   }

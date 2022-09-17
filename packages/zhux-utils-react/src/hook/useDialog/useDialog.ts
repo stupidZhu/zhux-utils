@@ -2,7 +2,7 @@ import { CSSProperties, useCallback, useEffect, useRef } from "react"
 import { useConfigContext } from "../../component/ConfigProvider/ConfigProvider"
 import { IRef } from "../../type"
 import { getCurrent } from "../../util"
-import { useWatchRefEffect } from "../effects/useWatchEffect/useWatchEffect"
+import { useWatchRefEffect } from "../effect/useWatchEffect"
 
 export type IPosition = { top: number; left: number }
 export type ISize = { width: number; height: number }

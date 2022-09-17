@@ -21,7 +21,6 @@ export const MyDialogA: React.FC<
         onClick={() => {
           // 注意此处用法，不应该 把isMoving解构出来（const { isMoving } = ...），因为作用域在函数定义时就已经确定了。而不是在函数调用时确定
           if (stateObj.isMoving) return
-          console.log("hello")
         }}
       >
         <button

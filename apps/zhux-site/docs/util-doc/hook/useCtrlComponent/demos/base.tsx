@@ -18,7 +18,7 @@ const BaseDemo = () => {
   const [value, onChange] = useState<string>()
 
   return (
-    <div className="common-com-demo">
+    <div>
       <div>
         <span>受控组件示例：</span>
         <button onClick={() => onChange(undefined)}>清除</button>

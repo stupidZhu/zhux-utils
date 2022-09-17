@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from "react"
 import { ITimer } from "zhux-utils/dist/type"
 import { IRef } from "../../type"
 import { getCurrent } from "../../util"
-import { useWatchRefEffect } from "../effects/useWatchEffect/useWatchEffect"
+import { useWatchRefEffect } from "../effect/useWatchEffect"
 
 // offsetWidth/offsetHeight：scrollWrapper 宽高
 // scrollHeight/scrollWidth：scrollChildren 宽高

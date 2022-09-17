@@ -18,10 +18,6 @@ const Pagination: React.FC<Props> = props => {
     setCurPage(utils.calcPage(curPage))
   }, [rest.total])
 
-  useEffect(() => {
-    console.log(pageList, utils.summary)
-  }, [pageList])
-
   return (
     <div className={classNames("pagination", className)} style={style}>
       {showSummary && <div className="summary">共{utils.summary.total}条</div>}

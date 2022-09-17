@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 import { useEffect, useState } from "react"
-import useMemoValue from "../useMemoValue/useMemoValue"
+import useMemoValue from "../memo/useMemoValue"
 
 interface UseDateTimeOptions<T extends string | string[]> {
   formatter?: T

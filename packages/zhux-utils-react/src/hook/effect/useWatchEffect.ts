@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
-import { IRef, LikeNull } from "../../../type"
-import { getCurrent } from "../../../util"
+import { IRef, LikeNull } from "../../type"
+import { getCurrent } from "../../util"
 
 export const useWatchRefEffect = <T = any>(
   cb: (val: T | LikeNull, prevVal: T | LikeNull) => void | (() => void),

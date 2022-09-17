@@ -2,8 +2,8 @@ import { cloneDeep } from "lodash"
 import { useCallback } from "react"
 import { IKey, IObj } from "zhux-utils/dist/type"
 import { CommonComProps } from "../../type"
+import useMemoValue from "../memo/useMemoValue"
 import useCtrlComponent from "../useCtrlComponent/useCtrlComponent"
-import useMemoValue from "../useMemoValue/useMemoValue"
 
 export type ChangeFieldFunc<T = any> = (changeType: "edit" | "del" | "add", value?: T & { _key?: IKey }) => IKey | undefined
 

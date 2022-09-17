@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import React, { useImperativeHandle, useRef } from "react"
 import { ClassStyle, IRef, WithChildren } from "../../type"
-import { useWatchRefEffect } from "../effects/useWatchEffect/useWatchEffect"
+import { useWatchRefEffect } from "../effect/useWatchEffect"
 import useScrollUtil, { UseScrollUtilProps } from "./useScrollUtil"
 
 export type ScrollRef = { current: ReturnType<typeof useScrollUtil> | undefined }

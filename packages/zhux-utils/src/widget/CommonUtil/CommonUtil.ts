@@ -1,7 +1,6 @@
 import { IObj } from "../../type"
 
-const addCacheWrapper = <T = Function>(func: T): T => {
-  if (typeof func !== "function") throw new Error("param error ,need function!")
+const addCacheWrapper = <T extends (...rest: any[]) => any>(func: T): T => {
   const cache: IObj = {}
 
   return function (...rest: any[]) {
@@ -9,10 +8,10 @@ const addCacheWrapper = <T = Function>(func: T): T => {
     if (cache[key]) return cache[key]
     cache[key] = (func as unknown as Function)(...rest)
     return cache[key]
-  } as unknown as T
+  } as T
 }
 
-export const genSetRefObjFunc = <T extends IObj>(obj: { current: T }) => {
+const genSetRefObjFunc = <T extends IObj>(obj: { current: T }) => {
   return <K extends keyof T>(key: K | Partial<T> | ((v: T) => T), value?: T[K]) => {
     if (typeof key === "string") {
       if (typeof value === "undefined") Reflect.deleteProperty(obj.current, key)
@@ -22,7 +21,7 @@ export const genSetRefObjFunc = <T extends IObj>(obj: { current: T }) => {
   }
 }
 
-export const genSetObjFunc = <T extends IObj>(obj: T) => {
+const genSetObjFunc = <T extends IObj>(obj: T) => {
   return <K extends keyof T>(key: K | Partial<T> | ((v: T) => void), value?: T[K]) => {
     if (typeof key === "string") {
       if (typeof value === "undefined") Reflect.deleteProperty(obj, key)
@@ -32,7 +31,7 @@ export const genSetObjFunc = <T extends IObj>(obj: T) => {
   }
 }
 
-export const parseJson = <T = any>(json: string): T | null => {
+const parseJson = <T = any>(json: string): T | null => {
   let res: T | null = null
   if (!json) return res
   try {
@@ -43,7 +42,7 @@ export const parseJson = <T = any>(json: string): T | null => {
   return res
 }
 
-export const getDom = (id: string, className?: string) => {
+const getDom = (id: string, className?: string) => {
   let dom = document.querySelector(`#${id}`)
   if (!dom) {
     dom = document.createElement("div")
@@ -54,4 +53,18 @@ export const getDom = (id: string, className?: string) => {
   return dom as HTMLDivElement
 }
 
-export default { addCacheWrapper, genSetRefObjFunc, genSetObjFunc, parseJson, getDom }
+// https://juejin.cn/post/7140558929750130719
+const abortablePromise = <T>(promise: Promise<T>) => {
+  const abortController = new AbortController()
+  const { signal } = abortController
+
+  return {
+    promise: new Promise<T>((resolve, reject) => {
+      signal.addEventListener("abort", () => reject(signal?.reason))
+      promise.then(resolve).catch(reject)
+    }),
+    abortController,
+  }
+}
+
+export default { addCacheWrapper, abortablePromise, genSetRefObjFunc, genSetObjFunc, parseJson, getDom }

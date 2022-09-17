@@ -50,6 +50,6 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = props => {
 
 export const useConfigContext = () => {
   const context = useContext(ConfigContext)
-  if (!context) console.warn("请使用 ConfigProvider 以体验 zhux-utils-react 完整功能。")
+  if (!context) console.warn("[ConfigProvider] 请使用 ConfigProvider 以体验 zhux-utils-react 完整功能。")
   return context
 }

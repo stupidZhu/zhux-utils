@@ -29,7 +29,6 @@ export type TreeNode<T = IObj, C extends string = "children"> = {
 } & T
 
 const useTree = <T, C extends string = "children">(treeData: T[], options: UseTreeOptions<T, C> = {}) => {
-  console.log("hello world !! !")
   // treeData 的备份
   const treeDataMemo = useRef<T[]>([])
   // 因为对象的引用类型，treeDataMap 的值改变会导致 treeDataRef 的值改变，再由 treeDataRef 生成 treeDataRender 用于渲染
