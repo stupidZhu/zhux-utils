@@ -194,7 +194,7 @@ const useDialog = (props: UseDialogProps) => {
     return () => delKey?.(key)
   }, [])
 
-  return { ...stateRef.current, getDialogInfo, setDialogInfo }
+  return { state: stateRef.current, getDialogInfo, setDialogInfo }
 }
 
 export default useDialog

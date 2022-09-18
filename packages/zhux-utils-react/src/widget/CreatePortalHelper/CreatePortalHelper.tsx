@@ -5,7 +5,7 @@ import ReactDOM from "react-dom"
 import { CommonUtil } from "zhux-utils"
 import { WithChildren } from "../../type"
 import { randomStr } from "../../util"
-import { reactPromiseHelper } from "../../util/bootstrap"
+import { reactListenHelper } from "../../util/bootstrap"
 import { DefaultPortalRoot, WrapperCom, WrapperRef } from "./WrapperCom"
 
 export interface CreatePortalHelperConfig {
@@ -83,14 +83,14 @@ class CreatePortalHelper {
     let msg = "init error！"
     if (this.renderType === "portal") msg += "请检查是否将 PortalRoot 写在了组件中"
 
-    return reactPromiseHelper.addListener<WrapperRef>(this.rootKey, 100).catch(() => {
+    return reactListenHelper.addListener<WrapperRef>(this.rootKey, 100).catch(() => {
       throw new Error(msg)
     })
   }
 
   private attachWrapperRef = (ref: WrapperRef) => {
     this.wrapperRef.current = ref
-    reactPromiseHelper.setRef(this.rootKey, this.wrapperRef.current)
+    reactListenHelper.setValue(this.rootKey, this.wrapperRef.current)
   }
 
   private detachWrapperRef = () => (this.wrapperRef.current = null)

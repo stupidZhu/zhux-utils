@@ -6,7 +6,10 @@ import { reactStorageHelper } from "../../util/bootstrap"
 
 const useStorageState = <T extends IObj>(key: string, defaultValue: T, customStorageHelper?: StorageHelper) => {
   const { storageHelper: _storageHelper } = useConfigContext() ?? {}
-  const storageHelper = useMemo(() => customStorageHelper ?? _storageHelper ?? reactStorageHelper, [customStorageHelper])
+  const storageHelper = useMemo(
+    () => customStorageHelper ?? _storageHelper ?? reactStorageHelper,
+    [_storageHelper, customStorageHelper]
+  )
   const [state, setState] = useState<T>({ ...defaultValue, ...storageHelper.getItem(key) })
 
   const setField = useCallback(

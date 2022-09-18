@@ -1,5 +1,5 @@
-import { RefPromiseHelper, StorageHelper } from "zhux-utils"
+import { ListenValueHelper, StorageHelper } from "zhux-utils"
 
-export const reactPromiseHelper = new RefPromiseHelper()
+export const reactListenHelper = new ListenValueHelper()
 
 export const reactStorageHelper = new StorageHelper("ZU")

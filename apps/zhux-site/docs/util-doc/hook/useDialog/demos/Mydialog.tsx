@@ -11,7 +11,7 @@ export const MyDialogA: React.FC<
   const moveFieldRef = useRef<HTMLDivElement>(null)
   const resizeFieldRef = useRef<HTMLDivElement>(null)
 
-  const stateObj = useDialog({ dialogRef, moveFieldRef, resizeFieldRef, moveCb, resizeCb })
+  const { state } = useDialog({ dialogRef, moveFieldRef, resizeFieldRef, moveCb, resizeCb })
 
   return (
     <div className="use-dialog dialog-a" ref={dialogRef} style={{ ...position }}>
@@ -20,7 +20,7 @@ export const MyDialogA: React.FC<
         ref={moveFieldRef}
         onClick={() => {
           // 注意此处用法，不应该 把isMoving解构出来（const { isMoving } = ...），因为作用域在函数定义时就已经确定了。而不是在函数调用时确定
-          if (stateObj.isMoving) return
+          if (state.isMoving) return
         }}
       >
         <button

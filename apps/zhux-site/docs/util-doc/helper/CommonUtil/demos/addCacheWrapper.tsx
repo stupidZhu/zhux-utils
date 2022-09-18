@@ -1,5 +1,5 @@
 /**
- * title: AddCacheWrapper
+ * title: addCacheWrapper
  * desc: 根据函数参数，缓存你的函数执行结果
  */
 
@@ -16,7 +16,7 @@ const testFunc = CommonUtil.addCacheWrapper(_testFunc)
 
 const AddCacheWrapper = () => {
   return (
-    <div>
+    <>
       <span>多次点击，_testFunc 只有第一次执行，后续的结果都是读取的缓存</span>&emsp;
       <button
         onClick={() => {
@@ -34,7 +34,7 @@ const AddCacheWrapper = () => {
       >
         打印时间戳
       </button>
-    </div>
+    </>
   )
 }
 

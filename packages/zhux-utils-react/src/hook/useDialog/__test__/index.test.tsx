@@ -45,7 +45,7 @@ describe("useDialog", () => {
       document.dispatchEvent(new MouseEvent("mousemove", { clientX: 200, clientY: 200, screenX: 200, screenY: 200 }))
     })
     expect(func).toHaveBeenCalledWith("moving")
-    expect(result.current.isMoving).toBe(true)
+    expect(result.current.state.isMoving).toBe(true)
 
     fireEvent.mouseUp(getByTestId("move-field"))
     expect(func).toHaveBeenCalledWith("moveEnd")
@@ -75,7 +75,7 @@ describe("useDialog", () => {
       document.dispatchEvent(new MouseEvent("mousemove", { clientX: 200, clientY: 200, screenX: 200, screenY: 200 }))
     })
     expect(func).toHaveBeenCalledWith("resizing")
-    expect(result.current.isResizing).toBe(true)
+    expect(result.current.state.isResizing).toBe(true)
 
     fireEvent.mouseUp(getByTestId("resize-field"))
     expect(func).toHaveBeenCalledWith("resizeEnd")
