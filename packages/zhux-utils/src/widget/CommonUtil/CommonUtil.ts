@@ -1,4 +1,5 @@
-import { IObj } from "../../type"
+import { cloneDeep } from "lodash"
+import { IKey, IObj, IOption } from "../../type"
 
 const addCacheWrapper = <T extends (...rest: any[]) => any>(func: T): T => {
   const cache: IObj = {}
@@ -67,4 +68,81 @@ const abortablePromise = <T>(promise: Promise<T>) => {
   }
 }
 
-export default { addCacheWrapper, abortablePromise, genSetRefObjFunc, genSetObjFunc, parseJson, getDom }
+interface ClearEmptyValOption {
+  clearEmptyStr?: boolean
+  clearSpace?: boolean
+}
+const clearEmptyVal = <T extends {} = IObj>(obj: T, option: ClearEmptyValOption = {}) => {
+  const { clearEmptyStr = true, clearSpace = true } = option
+  if (!obj) return obj
+  const newObj = cloneDeep(obj)
+  const condition = (v: any, clearEmptyStr = true) => {
+    let res = typeof v === "undefined" || v === null || v === "$$"
+    clearEmptyStr && (res = res || v === "")
+    return res
+  }
+
+  Object.entries(newObj).forEach(([k, v]) => {
+    if (clearSpace && typeof v === "string") newObj[k] = v.trim()
+    if (condition(v, clearEmptyStr)) Reflect.deleteProperty(newObj, k)
+  })
+  return newObj
+}
+
+const toOptions = {
+  arr2options<T extends IKey>(arr: T[]): IOption<T, T>[] {
+    return arr.map(item => ({ label: item, value: item }))
+  },
+  enum2options(e: Record<IKey, IKey>) {
+    const keys = Object.keys(e).filter(item => Number.isNaN(+item))
+    return keys.map(item => ({ value: e[item], label: item }))
+  },
+}
+
+/** 求差集 第一个减去第二个 */
+const subSet = <T = IKey>(arr1: T[], arr2: T[]): T[] => {
+  const set1 = new Set(arr1)
+  const set2 = new Set(arr2)
+  const result: T[] = []
+
+  set1.forEach(item => {
+    if (!set2.has(item)) result.push(item)
+  })
+
+  return result
+}
+
+const union = <T = IKey>(arr1: T[], arr2: T[]) => {
+  const set1 = new Set(arr1)
+  const set2 = new Set(arr2)
+  const result: T[] = []
+
+  set1.forEach(item => {
+    if (set2.has(item)) result.push(item)
+  })
+
+  return result
+}
+
+const genMap = <T extends IObj>(map: T) => {
+  return new Proxy(map, {
+    get(target, prop: string) {
+      if (!prop) return
+      return target[prop] ?? prop
+    },
+  })
+}
+
+export default {
+  addCacheWrapper,
+  abortablePromise,
+  genSetRefObjFunc,
+  genSetObjFunc,
+  parseJson,
+  getDom,
+  clearEmptyVal,
+  toOptions,
+  subSet,
+  union,
+  genMap,
+}

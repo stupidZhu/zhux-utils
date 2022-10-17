@@ -1,20 +1,28 @@
 import { IObj } from "../../type"
+import { hashCacheKey } from "./util"
 
 class CacheHelper {
   private store: IObj = {}
 
-  add = <T>(key: string, value: T): T => {
-    this.store[key] = value
+  add = <T>(key: any[], value: T): T => {
+    const hashKey = hashCacheKey(key)
+    this.store[hashKey] = value
     return value
   }
 
-  remove = (key: string) => Reflect.deleteProperty(this.store, key)
+  remove = (key: any[]) => {
+    const hashKey = hashCacheKey(key)
+    Reflect.deleteProperty(this.store, hashKey)
+  }
 
   clear = () => (this.store = {})
 
-  get = async <T = unknown>(key: string, cb: () => T | Promise<T>): Promise<T> => {
-    if (!this.store[key]) this.store[key] = await cb()
-    return this.store[key]
+  get<T = unknown>(key: any[], cb: () => T | Promise<T>): Promise<T>
+  get<T = unknown>(key: any[]): Promise<T | undefined>
+  async get<T = unknown>(key: any[], cb?: () => T | Promise<T>) {
+    const hashKey = hashCacheKey(key)
+    if (!this.store[hashKey]) this.store[hashKey] = await cb?.()
+    return this.store[hashKey]
   }
 }
 
