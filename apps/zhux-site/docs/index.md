@@ -7,7 +7,7 @@ hero:
       link: /util-doc
     - text: Blog
       link: /blog
-footer: Open-source MIT Licensed | Copyright © 2022-present<br />Powered by [dumi](https://d.umijs.org)
+footer: Open-source MIT Licensed | Copyright © 2022-present<br />Powered by [dumi](https://d.umijs.org)<br />备案号 [浙ICP备2022024338号-1](https://beian.miit.gov.cn)
 ---
 
 ## 📦 安装
