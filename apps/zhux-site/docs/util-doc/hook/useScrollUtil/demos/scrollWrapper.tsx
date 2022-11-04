@@ -17,6 +17,7 @@ const ScrollWrapperDemo = () => {
         scrollType="vertical"
         className="scroll-wrapper"
         scrollRef={scrollRef}
+        ensureScroll
         onReach={type => {
           if (type === "bottom") {
             setTimeout(() => {

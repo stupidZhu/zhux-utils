@@ -8,10 +8,11 @@ export type ScrollRef = { current: ReturnType<typeof useScrollUtil> | undefined 
 
 export interface ScrollWrapperProps extends ClassStyle, Omit<UseScrollUtilProps, "scrollDom"> {
   scrollRef?: ScrollRef
+  ensureScroll?: boolean
 }
 
 const ScrollWrapper: React.FC<ScrollWrapperProps & WithChildren> = props => {
-  const { scrollRef, style, className, children, ...rest } = props
+  const { scrollRef, ensureScroll, style, className, children, ...rest } = props
   const scrollWrapper = useRef<HTMLDivElement>(null)
   const scrollChildren = useRef<HTMLDivElement>(null)
 
@@ -22,7 +23,8 @@ const ScrollWrapper: React.FC<ScrollWrapperProps & WithChildren> = props => {
 
   useWatchRefEffect(
     c => {
-      if (c?.style) {
+      console.log(c, ensureScroll)
+      if (c?.style && ensureScroll) {
         c.style[rest.scrollType === "horizontal" ? "minWidth" : "minHeight"] = `calc(100% + ${
           (rest.reachThreshold ?? 20) + 1
         }px)`
