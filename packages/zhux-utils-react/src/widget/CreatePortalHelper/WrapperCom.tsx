@@ -145,7 +145,7 @@ export const WrapperCom: React.FC<WrapperComProps> = ({ wrapperRef, createPortal
 
 export const DefaultPortalRoot: React.FC = () => {
   useEffect(() => {
-    console.error("[CreatePortalHelper] 如果 renderType 为 render，则不必要使用 PortalRoot")
+    console.error("[zhux-utils-react - CreatePortalHelper] 如果 renderType 为 render，则不必要使用 PortalRoot")
   }, [])
   return null
 }

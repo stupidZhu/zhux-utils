@@ -23,7 +23,6 @@ const ScrollWrapper: React.FC<ScrollWrapperProps & WithChildren> = props => {
 
   useWatchRefEffect(
     c => {
-      console.log(c, ensureScroll)
       if (c?.style && ensureScroll) {
         c.style[rest.scrollType === "horizontal" ? "minWidth" : "minHeight"] = `calc(100% + ${
           (rest.reachThreshold ?? 20) + 1

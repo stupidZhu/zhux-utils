@@ -54,7 +54,7 @@ class CreatePortalHelper {
     const rootDom = this.getRootDom(props.className)
     if (props.renderType === "portal") this.PortalRoot = () => ReactDOM.createPortal(Wrapper, rootDom)
     else {
-      console.warn("[CreatePortalHelper] renderType 推荐使用 portal 而不是 render")
+      console.warn("[zhux-utils-react - CreatePortalHelper] renderType 推荐使用 portal 而不是 render")
       const element = props.Provider ? <props.Provider>{Wrapper}</props.Provider> : Wrapper
       // @ts-ignore
       if (ReactDOM.createRoot) {

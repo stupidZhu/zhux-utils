@@ -1,6 +1,6 @@
 {
   "name": "zhux-utils-react",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "description": "",
   "module": "dist/index.js",
   "main": "dist/index.umd.js",

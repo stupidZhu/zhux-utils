@@ -1,5 +1,6 @@
-import { cloneDeep } from "lodash"
+import { cloneDeep, isPlainObject } from "lodash"
 import { IKey, IObj, IOption } from "../../type"
+import TreeUtil from "./TreeUtil"
 
 const addCacheWrapper = <T extends (...rest: any[]) => any>(func: T): T => {
   const cache: IObj = {}
@@ -74,7 +75,7 @@ interface ClearEmptyValOption {
 }
 const clearEmptyVal = <T extends {} = IObj>(obj: T, option: ClearEmptyValOption = {}) => {
   const { clearEmptyStr = true, clearSpace = true } = option
-  if (!obj) return obj
+  if (!isPlainObject(obj)) return obj
   const newObj = cloneDeep(obj)
   const condition = (v: any, clearEmptyStr = true) => {
     let res = typeof v === "undefined" || v === null || v === "$$"
@@ -133,6 +134,16 @@ const genMap = <T extends IObj>(map: T) => {
   })
 }
 
+const removeStr = (str: string, config: { removeStart?: string; removeEnd?: string }) => {
+  const { removeStart, removeEnd } = config
+  if (!removeStart && !removeEnd) return str
+  const regStrList = []
+  removeStart && regStrList.push(`^(${removeStart})+`)
+  removeEnd && regStrList.push(`(${removeEnd})+$`)
+  const reg = new RegExp(regStrList.join("|"), "g")
+  return str.replace(reg, "")
+}
+
 export default {
   addCacheWrapper,
   abortablePromise,
@@ -145,4 +156,6 @@ export default {
   subSet,
   union,
   genMap,
+  removeStr,
+  ...TreeUtil,
 }

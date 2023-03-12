@@ -1,6 +1,6 @@
 import { message } from "antd"
 import { createBrowserHistory } from "history"
-import { RefPromiseHelper, StorageHelper } from "zhux-utils"
+import { ListenValueHelper, StorageHelper } from "zhux-utils"
 import { CreatePortalHelper } from "zhux-utils-react"
 
 message.config({ maxCount: 1 })
@@ -12,4 +12,4 @@ export const createPortalHelper = new CreatePortalHelper({ renderType: "portal" 
 
 export const storageHelper = new StorageHelper("UD")
 
-export const refPromiseHelper = new RefPromiseHelper()
+export const listenValueHelper = new ListenValueHelper()

@@ -1,59 +1,58 @@
 import dayjs from "dayjs"
 import duration, { DurationUnitsObjectType } from "dayjs/plugin/duration"
-import { IKey } from "../../type"
+import { isNil } from "lodash"
+import CommonUtil from "../CommonUtil/CommonUtil"
 dayjs.extend(duration)
 
-class StorageHelper {
-  private prefix: IKey
-  length = localStorage.length
+class StorageHelper implements Storage {
+  private _prefix: string
+  private _storage: Storage
 
-  constructor(prefix: IKey) {
-    this.prefix = prefix
+  constructor(prefix: string, type: "local" | "session" = "local") {
+    this._prefix = prefix ? `${prefix}_` : prefix
+    this._storage = type === "local" ? globalThis.localStorage : globalThis.sessionStorage
   }
 
-  private calcExpire(duration?: DurationUnitsObjectType | number) {
-    if (!duration) return Number.MAX_SAFE_INTEGER
-    if (typeof duration === "number") return Date.now() + duration
-    const milliseconds = dayjs.duration(duration).asMilliseconds()
-    return milliseconds ? Date.now() + milliseconds : Number.MAX_SAFE_INTEGER
+  get length(): number {
+    return this._storage.length
   }
 
-  getItem<T>(key: IKey): T | null
-  getItem<T>(key: IKey, defaultValue: T): T
-  getItem<T>(key: IKey, defaultValue?: T) {
-    if (this.prefix) key = `${this.prefix}_${key}`
-    let res: any = localStorage.getItem(String(key))
-    if (res) {
-      try {
-        res = JSON.parse(res ?? "null")
-      } catch (e) {}
+  clear() {
+    this._storage.clear()
+  }
+
+  key(index: number) {
+    return this._storage.key(index)
+  }
+
+  removeItem(key: string) {
+    key = this._prefix + key
+    this._storage.removeItem(key)
+  }
+
+  getItem(key: string) {
+    const data = this._storage.getItem(this._prefix + key)
+    if (!data) return data
+    const dataObj = CommonUtil.parseJson(data)
+    if (!dataObj) return data
+    if (!dataObj._expire || typeof dataObj._expire !== "number" || !("value" in dataObj)) return data
+    if (dataObj._expire < Date.now()) {
+      this.removeItem(key)
+      return null
     }
-    if (typeof res === "object" && typeof res?._expire === "number" && res?.data) {
-      if (res._expire < Date.now()) {
-        localStorage.removeItem(String(key))
-        return defaultValue ?? null
-      }
-      return res?.data ?? defaultValue ?? null
-    } else return res ?? defaultValue ?? null
+    return dataObj.value
   }
 
-  setItem = (key: IKey, value: any, _expire?: DurationUnitsObjectType | number) => {
-    if (this.prefix) key = `${this.prefix}_${key}`
-    _expire = this.calcExpire(_expire)
-    const res = { data: value, _expire }
-    localStorage.setItem(String(key), JSON.stringify(res))
+  setItem(key: string, value: any, _expire?: DurationUnitsObjectType | number) {
+    if (isNil(value)) return
+    key = this._prefix + key
+    const data = { value, _expire }
+    if (_expire) {
+      const ms = typeof _expire === "number" ? _expire : dayjs.duration(_expire).asMilliseconds()
+      data._expire = Date.now() + ms
+    } else data._expire = Number.MAX_SAFE_INTEGER
+    this._storage.setItem(key, JSON.stringify(data))
   }
-
-  removeItems = (keys: IKey[]) => {
-    keys.forEach(item => {
-      if (this.prefix) item = `${this.prefix}_${item}`
-      localStorage.removeItem(String(item))
-    })
-  }
-
-  removeItem = localStorage.removeItem.bind(localStorage)
-  clear = localStorage.clear.bind(localStorage)
-  key = localStorage.key.bind(localStorage)
 }
 
 export default StorageHelper

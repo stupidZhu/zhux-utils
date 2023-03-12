@@ -8,6 +8,7 @@ export interface UseCtrlComponentOptions<T = any> {
   defaultValue?: T
 }
 
+// * 因为存在 *PropName 所以没有进行类型推断
 const useCtrlComponent = <T = any>(props: IObj, options: UseCtrlComponentOptions<T> = {}) => {
   const {
     defaultValuePropName = "defaultValue",
