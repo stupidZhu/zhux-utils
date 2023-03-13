@@ -17,36 +17,38 @@ class StorageHelper implements Storage {
     return this._storage.length
   }
 
-  clear() {
+  clear = () => {
     this._storage.clear()
   }
 
-  key(index: number) {
+  key = (index: number) => {
     return this._storage.key(index)
   }
 
-  removeItem(key: string) {
+  removeItem = (key: string) => {
     key = this._prefix + key
     this._storage.removeItem(key)
   }
 
-  getItem(key: string) {
+  getItem = <T = any>(key: string): T | null => {
     const data = this._storage.getItem(this._prefix + key)
-    if (!data) return data
-    const dataObj = CommonUtil.parseJson(data)
-    if (!dataObj) return data
-    if (!dataObj._expire || typeof dataObj._expire !== "number" || !("value" in dataObj)) return data
+
+    if (!data) return null
+    const dataObj = CommonUtil.parseJson(data, true)
+    if (!dataObj) return null
+    if (!dataObj._expire || typeof dataObj._expire !== "number" || !("data" in dataObj)) return null
+
     if (dataObj._expire < Date.now()) {
       this.removeItem(key)
       return null
     }
-    return dataObj.value
+    return dataObj.data
   }
 
-  setItem(key: string, value: any, _expire?: DurationUnitsObjectType | number) {
+  setItem = (key: string, value: any, _expire?: DurationUnitsObjectType | number) => {
     if (isNil(value)) return
     key = this._prefix + key
-    const data = { value, _expire }
+    const data = { data: value, _expire }
     if (_expire) {
       const ms = typeof _expire === "number" ? _expire : dayjs.duration(_expire).asMilliseconds()
       data._expire = Date.now() + ms

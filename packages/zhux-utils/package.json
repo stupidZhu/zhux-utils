@@ -1,6 +1,6 @@
 {
   "name": "zhux-utils",
-  "version": "0.2.3",
+  "version": "0.2.6",
   "description": "",
   "module": "dist/index.js",
   "main": "dist/index.umd.js",

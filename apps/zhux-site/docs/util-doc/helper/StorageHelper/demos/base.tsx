@@ -19,12 +19,13 @@ const BaseDemo = () => {
       <button
         onClick={() => {
           localStorage.setItem("ZX_ITEM3", JSON.stringify({ hello: "world", _expire: [1] }))
-          console.log(storageHelper.getItem("ITEM3"))
+          localStorage.setItem("ZX_ITEM4", "hello")
+          console.log(storageHelper.getItem("ITEM3"), storageHelper.getItem("ITEM3"))
         }}
       >
-        不符合规范的值会直接返回
+        不符合规范的值会返回null
       </button>
-      <button onClick={() => ["ITEM1", "ITEM2"].map(storageHelper.removeItem)}>移除</button>
+      <button onClick={() => ["ITEM1", "ITEM2", "ITEM3", "ITEM4"].map(storageHelper.removeItem)}>移除</button>
     </div>
   )
 }

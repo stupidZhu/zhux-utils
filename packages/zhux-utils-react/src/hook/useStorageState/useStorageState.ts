@@ -41,7 +41,7 @@ export const useStorageStore = <T extends IObj>(key: string, defaultValue?: T, c
     [_storageHelper, customStorageHelper]
   )
 
-  const storeObj = useStoreState<T>({ ...(defaultValue ?? {}), ...storageHelper.getItem(key) })
+  const storeObj = useStoreState<T>({ ...(defaultValue ?? {}), ...storageHelper.getItem<T>(key) } as T)
 
   useEffect(() => {
     storageHelper.setItem(key, storeObj[0])
@@ -57,7 +57,7 @@ export const useStorageValue = <T = unknown>(key: string, defaultValue?: T, cust
     [_storageHelper, customStorageHelper]
   )
 
-  const stateObj = useState<T>(storageHelper.getItem(key) ?? defaultValue)
+  const stateObj = useState<T | undefined>(storageHelper.getItem<T>(key) ?? defaultValue)
 
   useEffect(() => {
     storageHelper.setItem(key, stateObj[0])

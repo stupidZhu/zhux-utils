@@ -33,13 +33,13 @@ const genSetObjFunc = <T extends IObj>(obj: T) => {
   }
 }
 
-const parseJson = <T = any>(json: string): T | null => {
+const parseJson = <T = any>(json: string, preventLog = false): T | null => {
   let res: T | null = null
   if (!json) return res
   try {
     res = JSON.parse(json)
   } catch (e) {
-    console.error(e)
+    !preventLog && console.error(e)
   }
   return res
 }
