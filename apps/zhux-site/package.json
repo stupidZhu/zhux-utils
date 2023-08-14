@@ -6,22 +6,24 @@
     "build": "dumi build"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.182",
+    "@types/lodash": "^4.14.185",
     "@types/react-transition-group": "^4.4.5",
-    "@types/react": "^18.0.15",
+    "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "@umijs/plugin-sass": "^1.1.1",
     "dumi": "^1.0.13",
     "prettier": "^2.2.1",
     "yorkie": "^2.0.0",
-    "eslint": "^8.20.0",
-    "eslint-config-react": "workspace:*",
-    "tsconfig": "workspace:*"
+    "eslint": "^8.24.0",
+    "eslint-config-custom-react": "workspace:*",
+    "tsconfig": "workspace:*",
+    "stylelint": "^14.12.1",
+    "stylelint-config-custom": "*"
   },
   "dependencies": {
     "ahooks": "^3.7.0",
-    "classnames": "^2.3.1",
-    "dayjs": "^1.11.4",
+    "classnames": "^2.3.2",
+    "dayjs": "^1.11.5",
     "lodash": "^4.17.21",
     "react-transition-group": "^4.4.5",
     "react": "^18.2.0",

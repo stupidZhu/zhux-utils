@@ -15,5 +15,7 @@ export default defineConfig({
   alias: {
     "dumi-theme-some": path.resolve("./node_modules/dumi-theme-some"),
   },
+  base: "/zhux-utils",
+  publicPath: "/zhux-utils/",
   // more config: https://d.umijs.org/config
 })

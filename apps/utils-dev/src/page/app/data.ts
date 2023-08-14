@@ -1,5 +1,6 @@
 import React from "react"
 import { IOption } from "zhux-utils/dist/type"
+import CtrlComponent from "../devPage/CtrlComponent"
 import CustomField from "../devPage/CustomField"
 import Dialog from "../devPage/Dialog"
 import Memo from "../devPage/Memo"
@@ -12,6 +13,7 @@ const routerOptions: Array<IOption<string, string> & { com: React.FC }> = [
   { label: "Memo", value: "Memo", com: Memo },
   { label: "StorageHelper", value: "StorageHelper", com: StorageHelper },
   { label: "TestTree", value: "TestTree", com: TestTree },
+  { label: "CtrlComponent", value: "CtrlComponent", com: CtrlComponent },
 ]
 
 export default routerOptions

@@ -1,16 +1,16 @@
 {
-  "name": "eslint-config-react",
+  "name": "eslint-config-custom-react",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "eslint": "^8.23.1",
-    "eslint-config-ts": "workspace:*",
-    "eslint-plugin-react": "7.31.7",
+    "eslint": "^8.24.0",
+    "eslint-config-custom-ts": "workspace:*",
+    "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "devDependencies": {
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   },
   "publishConfig": {
     "access": "public"

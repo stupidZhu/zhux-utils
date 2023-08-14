@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": ["react", "plugin:react/jsx-runtime"]
+  "extends": ["custom-react"]
 }
