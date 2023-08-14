@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link
+      charset="utf-8"
+      rel="stylesheet"
+      type="text/css"
+      href="http://file.zhux.cc/zhux-site/common.css"
+    />
+    <link
+      charset="utf-8"
+      rel="stylesheet"
+      type="text/css"
+      href="//at.alicdn.com/t/font_2346762_78tfqsq57sm.css"
+    />
+    <link rel="stylesheet" href="/zhux-utils/umi.568bb846.css" />
+    <script>
+      window.routerBase = "/zhux-utils";
+    </script>
+    <script>
+      //! umi version: 3.5.41
+    </script>
+    <script>
+      !(function () {
+        var e =
+            navigator.cookieEnabled && void 0 !== window.localStorage
+              ? localStorage.getItem("dumi:prefers-color")
+              : "auto",
+          o = window.matchMedia("(prefers-color-scheme: dark)").matches,
+          t = ["light", "dark", "auto"];
+        document.documentElement.setAttribute(
+          "data-prefers-color",
+          e === t[2] ? (o ? t[1] : t[0]) : t.indexOf(e) > -1 ? e : t[0]
+        );
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="/zhux-utils/umi.751e30cc.js"></script>
+  </body>
+</html>
