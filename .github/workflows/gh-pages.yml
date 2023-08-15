@@ -13,10 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2.0.1
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.32.2
 

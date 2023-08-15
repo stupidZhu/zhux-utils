@@ -1,5 +1,7 @@
 ---
 title: 为什么用 dumi 写 blog
+group:
+  title: 未分类
 ---
 
 # 为什么用 dumi 写 blog
