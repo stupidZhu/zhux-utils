@@ -1,7 +1,7 @@
 ---
 title: zhux-utils - React Utils
 hero:
-  image: http://43.142.32.143:7777/zhux-site/logo.svg
+  image: https://s2.loli.net/2023/08/15/viFKg9krfsMJU2Y.png
   actions:
     - text: Doc
       link: /util-doc
