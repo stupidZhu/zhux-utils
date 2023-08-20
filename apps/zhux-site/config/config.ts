@@ -4,7 +4,7 @@ import path from "path"
 export default defineConfig({
   title: "Hello zhux !",
   mode: "site",
-  logo: "/logo.svg",
+  logo: "https://s2.loli.net/2023/08/15/viFKg9krfsMJU2Y.png",
   locales: [["zh-CN", "中文"]],
   navs: [
     { title: "Doc", path: "/util-doc" },
