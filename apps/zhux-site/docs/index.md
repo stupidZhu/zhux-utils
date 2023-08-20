@@ -1,12 +1,12 @@
 ---
 title: zhux-utils - React Utils
-hero:
-  image: https://s2.loli.net/2023/08/15/viFKg9krfsMJU2Y.png
-  actions:
-    - text: Doc
-      link: /util-doc
-    - text: Blog
-      link: /blog
+# hero:
+#   image: /logoBlack.png
+#   actions:
+#     - text: Doc
+#       link: /util-doc
+#     - text: Blog
+#       link: /blog
 footer: Open-source MIT Licensed | Copyright © 2022-present<br />Powered by [dumi](https://d.umijs.org)
 ---
 

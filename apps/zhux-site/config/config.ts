@@ -4,15 +4,15 @@ import path from "path"
 export default defineConfig({
   title: "Hello zhux !",
   mode: "site",
-  logo: "https://s2.loli.net/2023/08/15/viFKg9krfsMJU2Y.png",
+  logo: "/logo.svg",
   locales: [["zh-CN", "中文"]],
   navs: [
     { title: "Doc", path: "/util-doc" },
     { title: "Blog", path: "/blog" },
-    { title: "GitHub", path: "https://github.com/stupidZhu" },
+    { title: "GitHub", path: "https://github.com/stupidZhu/zhux-utils" },
   ],
   styles: [
-    "button{cursor:pointer}.btn-wrapper{display:flex;gap:10px;width:100%}.column{flex-direction:column}",
+    "button{cursor:pointer}.btn-wrapper{display:flex;gap:10px;width:100%}.column{flex-direction:column}.info-img{box-shadow:1px 1px 4px #00000010}",
     "//at.alicdn.com/t/font_2346762_78tfqsq57sm.css",
   ],
   alias: {

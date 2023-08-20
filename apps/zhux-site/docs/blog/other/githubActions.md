@@ -38,8 +38,8 @@ Error: error:0308010C:digital envelope routines::unsupported
 
 一开始是打算升级 dumi 到 v2.x，想着也顺便学习一下新版本的新特性。但是升级后觉得页面布局不如 1.x 顺眼， MarkDown 页面的导航也不如原先的好用
 
-<img src="https://s2.loli.net/2023/08/15/riKVh8CsF9dyqJS.png" style="width:49%;height:auto;">
-<img src="https://s2.loli.net/2023/08/15/PZ2C1KMDGjAmfRa.png" style="width:49%;height:auto;">
+<img src="./img/dumi1.png" style="width:49%;height:auto;">
+<img src="./img/dumi2.png" style="width:49%;height:auto;">
 
 最终解决方案就是降级 Node 到 v16，项目正常启动，正常打包
 

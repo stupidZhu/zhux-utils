@@ -6,12 +6,7 @@ import React, { useState } from "react"
 import ImgPicker from "./ImgPicker"
 import "./index.scss"
 
-export const imgList = [
-  "https://s2.loli.net/2023/08/15/ToZ19pXz2iGfDQA.png",
-  "https://s2.loli.net/2023/08/15/i9qSGQzp3PxBJmb.png",
-  "https://s2.loli.net/2023/08/15/Rgy8GZw2urfkaLb.png",
-  "https://s2.loli.net/2023/08/15/IVXJEAoBL2umlTy.png",
-]
+export const imgList = ["/logoBlue.png", "/logoGreen.png", "/logoRed.png", "/logoYellow.png"]
 
 const BaseDemo = () => {
   const [value, onChange] = useState<string>()
