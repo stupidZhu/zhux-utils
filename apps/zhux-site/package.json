@@ -1,23 +1,25 @@
 {
-  "private": true,
   "name": "zhux-site",
+  "version": "0.0.1",
+  "description": "A static site based on dumi",
   "scripts": {
     "dev": "dumi dev",
     "build": "dumi build"
   },
+  "authors": [],
+  "license": "MIT",
   "devDependencies": {
     "@types/lodash": "^4.14.185",
     "@types/react-transition-group": "^4.4.5",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
-    "@umijs/plugin-sass": "^1.1.1",
-    "dumi": "^1.1.0",
-    "yorkie": "^2.0.0",
     "eslint": "^8.24.0",
     "eslint-config-custom-react": "workspace:*",
     "tsconfig": "workspace:*",
     "stylelint": "^14.12.1",
-    "stylelint-config-custom": "*"
+    "stylelint-config-custom": "*",
+    "dumi": "^2.2.0",
+    "prettier": "^2.7.1"
   },
   "dependencies": {
     "ahooks": "^3.7.0",

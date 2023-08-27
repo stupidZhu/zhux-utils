@@ -38,3 +38,6 @@ dist
 .umi-production
 .env.local
 
+.dumi/tmp
+.dumi/tmp-production
+

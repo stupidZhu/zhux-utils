@@ -1,0 +1,27 @@
+@import "docs/utils-doc/style";
+.img-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: max(vw(400), 200px);
+  .img-item {
+    position: relative;
+    display: flex;
+    flex: 0 0 25%;
+    align-items: center;
+    justify-content: center;
+    height: 0;
+    padding-bottom: 25%;
+    border-radius: 2px;
+    cursor: pointer;
+    &.active {
+      background-color: rgba($theme-light-green, 0.5);
+    }
+    > img {
+      position: absolute;
+      top: 50%;
+      width: 90%;
+      transform: translateY(-50%);
+    }
+  }
+}

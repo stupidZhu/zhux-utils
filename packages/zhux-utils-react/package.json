@@ -17,7 +17,8 @@
     "test": "jest",
     "watch:rollup": "cross-env NODE_ENV=development rollup -w -c",
     "watch:ts": "tsc -w",
-    "watch": "run-p watch:ts watch:rollup"
+    "watch": "run-p watch:ts watch:rollup",
+    "publish": "pnpm publish"
   },
   "keywords": [],
   "author": "",

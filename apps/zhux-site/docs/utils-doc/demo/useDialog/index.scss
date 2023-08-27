@@ -1,0 +1,46 @@
+@import "docs/utils-doc/style";
+.use-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 300px;
+  background-color: cadetblue;
+  &.dialog-a {
+  }
+  &.dialog-b {
+    background-color: $theme-light-blue;
+    .move-field {
+      background-color: $theme-light-green;
+    }
+  }
+  .move-field {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 35px;
+    background-color: pink;
+    cursor: move;
+  }
+  .resize-field {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #aaa;
+    cursor: se-resize;
+  }
+  .desc {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+  }
+  .use-dialog-content {
+    flex: 1;
+    overflow: auto;
+  }
+}

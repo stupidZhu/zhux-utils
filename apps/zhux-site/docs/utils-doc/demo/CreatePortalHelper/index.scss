@@ -1,0 +1,83 @@
+@import "docs/utils-doc/style";
+.base-item {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 10px 30px;
+  background-color: pink;
+}
+
+.my-dialog {
+  position: fixed;
+  top: vh(300);
+  left: calc(50% - vw(250));
+  width: vw(500);
+  min-height: vh(300);
+  background-color: #eee;
+  box-shadow: 5px 5px 5px rgba(#000, 0.1);
+
+  .move-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: vh(40);
+    cursor: move;
+  }
+  .dialog-header {
+    height: vh(40);
+    padding: 0 vw(20);
+    background-color: pink;
+    @include flex($j: space-between);
+    > span {
+      &:nth-child(2) {
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        &:hover {
+          color: $theme-red;
+        }
+      }
+    }
+  }
+  .dialog-content {
+    padding: vw(20);
+  }
+}
+
+.dialog-enter {
+  transform: scale(0.9);
+  opacity: 0;
+}
+.dialog-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: opacity 300ms, transform 300ms;
+}
+.dialog-exit {
+  opacity: 1;
+}
+.dialog-exit-active {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.dialog-1000-enter {
+  transform: scale(0.9);
+  opacity: 0;
+}
+.dialog-1000-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: opacity 1s, transform 1s;
+}
+.dialog-1000-exit {
+  opacity: 1;
+}
+.dialog-1000-exit-active {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: opacity 1s, transform 1s;
+}

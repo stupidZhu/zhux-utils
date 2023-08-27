@@ -1,0 +1,36 @@
+button {
+  cursor: pointer;
+}
+.btn-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.column {
+  flex-direction: column;
+}
+.info-img {
+  box-shadow: 1px 1px 4px #00000010;
+}
+
+.hr-with-content {
+  color: #a2a9b6;
+  border: 0;
+  font-size: 12px;
+  padding: 3em 0;
+  position: relative;
+  overflow: hidden;
+}
+.hr-with-content::before {
+  content: attr(data-content);
+  position: absolute;
+  padding: 0 1ch;
+  line-height: 1px;
+  border: solid #d0d0d5;
+  border-width: 0 99vw;
+  width: fit-content;
+  /* for 不支持fit-content浏览器 */
+  white-space: nowrap;
+  left: 50%;
+  transform: translateX(-50%);
+}

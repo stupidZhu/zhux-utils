@@ -1,0 +1,57 @@
+@import "docs/utils-doc/style";
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  .summary {
+    white-space: nowrap;
+  }
+  .page-list {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    > button {
+      background-color: transparent;
+      border: none;
+      outline: none;
+    }
+    .page-item {
+      &:hover {
+        color: $theme-green;
+      }
+      &.active {
+        color: $theme-green;
+        font-size: 1.2em;
+      }
+    }
+    .turn-page-btn {
+      width: max(23px, vw(23));
+      height: max(23px, vw(23));
+      background-color: rgba(#fff, 0.2);
+      border: 1px solid rgba(#fff, 0.3);
+      border-radius: 3px;
+      &:hover {
+        color: $theme-green;
+        background-color: rgba($theme-green, 0.2);
+        border-color: rgba($theme-green, 0.3);
+      }
+    }
+  }
+  .jump-to {
+    white-space: nowrap;
+    > input {
+      width: max(40px, vw(40));
+      height: max(23px, vw(23));
+      color: $theme-green;
+      background-color: rgba(#000, 0.1);
+      border: 1px solid rgba(#000, 0.2);
+      border-radius: 3px;
+      &:focus {
+        background-color: rgba($theme-green, 0.2);
+        border-color: rgba($theme-green, 0.3);
+      }
+    }
+  }
+}

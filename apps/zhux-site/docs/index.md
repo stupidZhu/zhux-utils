@@ -1,13 +1,13 @@
 ---
-title: zhux-utils - React Utils
-# hero:
-#   image: /logoBlack.png
-#   actions:
-#     - text: Doc
-#       link: /util-doc
-#     - text: Blog
-#       link: /blog
-footer: Open-source MIT Licensed | Copyright © 2022-present<br />Powered by [dumi](https://d.umijs.org)
+title: hello zhux !
+hero:
+  title: ZHUX
+  description: A static site based on dumi
+  actions:
+    - text: Doc
+      link: utils-doc/use-watch-effect
+    - text: Blog
+      link: blog/blog
 ---
 
 ## 📦 安装
