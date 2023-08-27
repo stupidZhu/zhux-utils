@@ -1,4 +1,5 @@
-import { DependencyList, useCallback, useEffect, useRef, useState } from "react"
+import { useMemoizedFn } from "ahooks"
+import { DependencyList, useEffect, useRef, useState } from "react"
 import { CommonUtil } from "zhux-utils"
 // TODO: 好像有 bug，暂时不知道原因和解决办法
 
@@ -34,7 +35,7 @@ function useAsyncMemo<T>(factory: () => Promise<T>, deps: DependencyList | undef
   const times = useRef(0)
   const abortRef = useRef<AbortController | null>(null)
 
-  const tryFetch = useCallback(() => {
+  const tryFetch = useMemoizedFn(() => {
     const { promise, abortController } = CommonUtil.abortablePromise(factory())
     abortRef.current = abortController
     setStatus("loading")
@@ -59,7 +60,7 @@ function useAsyncMemo<T>(factory: () => Promise<T>, deps: DependencyList | undef
       })
 
     return () => abortController
-  }, [factory, reFetchDelay, reFetchTimes])
+  })
 
   useEffect(() => {
     tryFetch()

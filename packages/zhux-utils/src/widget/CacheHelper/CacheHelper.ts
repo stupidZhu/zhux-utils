@@ -1,18 +1,7 @@
-import { isPlainObject } from "lodash"
 import { IObj } from "../../type"
+import CommonUtil from "../CommonUtil/CommonUtil"
 
-const hashCacheKey = (cacheKey: any[]): string => {
-  return JSON.stringify(cacheKey, (_, val) =>
-    isPlainObject(val)
-      ? Object.keys(val)
-          .sort()
-          .reduce((result, key) => {
-            result[key] = val[key]
-            return result
-          }, {} as any)
-      : val
-  )
-}
+const { hashCacheKey } = CommonUtil
 
 class CacheHelper {
   private store: IObj = {}

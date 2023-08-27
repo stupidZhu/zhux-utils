@@ -20,21 +20,11 @@ const GenSetObjFunc = () => {
         <div className="btn-wrapper">
           <button
             onClick={() => {
-              const name = obj.name === "hello" ? "world" : "hello"
-              setObjFunc("name", name)
+              setObjFunc({ age: obj.age + 1 })
               console.log(obj)
             }}
           >
             set方式1
-          </button>
-          <button
-            onClick={() => {
-              const age = obj.age + 1
-              setObjFunc({ age })
-              console.log(obj)
-            }}
-          >
-            set方式2
           </button>
           <button
             onClick={() => {
@@ -42,9 +32,8 @@ const GenSetObjFunc = () => {
               console.log(obj)
             }}
           >
-            set方式3
+            set方式2
           </button>
-          <button onClick={() => console.log(obj)}>打印</button>
         </div>
       </fieldset>
       <fieldset>
@@ -52,8 +41,7 @@ const GenSetObjFunc = () => {
         <div className="btn-wrapper">
           <button
             onClick={() => {
-              const name = refObj.current.name === "hello" ? "world" : "hello"
-              setRefObjFunc("name", name)
+              setRefObjFunc({ age: refObj.current.age + 1 })
               console.log(refObj.current)
             }}
           >
@@ -61,22 +49,12 @@ const GenSetObjFunc = () => {
           </button>
           <button
             onClick={() => {
-              const age = refObj.current.age + 1
-              setRefObjFunc({ age })
+              setRefObjFunc(o => ({ ...o, gender: !o.gender }))
               console.log(refObj.current)
             }}
           >
             set方式2
           </button>
-          <button
-            onClick={() => {
-              setRefObjFunc(o => ({ ...o, gender: !o.gender }))
-              console.log(refObj.current)
-            }}
-          >
-            set方式3
-          </button>
-          <button onClick={() => console.log(refObj.current)}>打印</button>
         </div>
       </fieldset>
     </>

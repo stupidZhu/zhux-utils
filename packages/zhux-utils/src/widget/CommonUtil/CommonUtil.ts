@@ -1,12 +1,25 @@
-import { cloneDeep, isPlainObject } from "lodash"
+import { cloneDeep, isPlainObject, merge } from "lodash"
 import { IKey, IObj, IOption } from "../../type"
 import TreeUtil from "./TreeUtil"
+
+const hashCacheKey = (cacheKey: any[]): string => {
+  return JSON.stringify(cacheKey, (_, val) =>
+    isPlainObject(val)
+      ? Object.keys(val)
+          .sort()
+          .reduce((result, key) => {
+            result[key] = val[key]
+            return result
+          }, {} as any)
+      : val
+  )
+}
 
 const addCacheWrapper = <T extends (...rest: any[]) => any>(func: T): T => {
   const cache: IObj = {}
 
   return function (...rest: any[]) {
-    const key = JSON.stringify(rest)
+    const key = hashCacheKey(rest)
     if (cache[key]) return cache[key]
     cache[key] = (func as unknown as Function)(...rest)
     return cache[key]
@@ -14,22 +27,16 @@ const addCacheWrapper = <T extends (...rest: any[]) => any>(func: T): T => {
 }
 
 const genSetRefObjFunc = <T extends IObj>(obj: { current: T }) => {
-  return <K extends keyof T>(key: K | Partial<T> | ((v: T) => T), value?: T[K]) => {
-    if (typeof key === "string") {
-      if (typeof value === "undefined") Reflect.deleteProperty(obj.current, key)
-      else obj.current = { ...obj.current, [key]: value }
-    } else if (typeof key === "function") obj.current = key(obj.current)
-    else obj.current = { ...obj.current, ...(key as Partial<T>) }
+  return (val: Partial<T> | ((v: T) => T)) => {
+    if (typeof val === "function") obj.current = val(obj.current)
+    else obj.current = merge(obj.current, val)
   }
 }
 
 const genSetObjFunc = <T extends IObj>(obj: T) => {
-  return <K extends keyof T>(key: K | Partial<T> | ((v: T) => void), value?: T[K]) => {
-    if (typeof key === "string") {
-      if (typeof value === "undefined") Reflect.deleteProperty(obj, key)
-      else obj[key as keyof T] = value
-    } else if (typeof key === "function") key(obj)
-    else Object.entries(key).map(<Key extends keyof T>([k, v]: [Key, T[Key]]) => (obj[k] = v))
+  return (val: Partial<T> | ((v: T) => void)) => {
+    if (typeof val === "function") val(obj)
+    else merge(obj, val)
   }
 }
 
@@ -44,15 +51,17 @@ const parseJson = <T = any>(json: string, preventLog = false): T | null => {
   return res
 }
 
-const getDom = (id: string, className?: string) => {
+const getDom = (id: string, option: { className?: string; tag?: keyof HTMLElementTagNameMap } = {}) => {
+  const { className, tag = "div" } = option
+
   let dom = document.querySelector(`#${id}`)
   if (!dom) {
-    dom = document.createElement("div")
+    dom = document.createElement(tag)
     dom.id = id
     document.body.appendChild(dom)
   }
   className && dom.classList.add(className)
-  return dom as HTMLDivElement
+  return dom as HTMLElement
 }
 
 // https://juejin.cn/post/7140558929750130719
@@ -69,24 +78,31 @@ const abortablePromise = <T>(promise: Promise<T>) => {
   }
 }
 
-interface ClearEmptyValOption {
+interface ClearEmptyValOption<T> {
+  /** 是否移除空字符串 */
   clearEmptyStr?: boolean
+  /** 如果是字符串是否调用 trim 移除空格 */
   clearSpace?: boolean
+  /** 返回：true - 该字段保留；false - 该字段移除 */
+  customCb?: <K extends keyof T>(k: K, v: T[K]) => boolean
 }
-const clearEmptyVal = <T extends {} = IObj>(obj: T, option: ClearEmptyValOption = {}) => {
-  const { clearEmptyStr = true, clearSpace = true } = option
+const clearEmptyVal = <T extends {} = IObj>(obj: T, option: ClearEmptyValOption<T> = {}) => {
+  const { clearEmptyStr = true, clearSpace = true, customCb } = option
   if (!isPlainObject(obj)) return obj
   const newObj = cloneDeep(obj)
-  const condition = (v: any, clearEmptyStr = true) => {
-    let res = typeof v === "undefined" || v === null || v === "$$"
-    clearEmptyStr && (res = res || v === "")
-    return res
+
+  const condition = (k: string, v: unknown) => {
+    if (v === undefined || v === null || v === "$$") return false
+    if (clearEmptyStr && v === "") return false
+    if (customCb) return customCb(k as any, v)
+    return true
   }
 
   Object.entries(newObj).forEach(([k, v]) => {
     if (clearSpace && typeof v === "string") newObj[k] = v.trim()
-    if (condition(v, clearEmptyStr)) Reflect.deleteProperty(newObj, k)
+    if (!condition(k, newObj[k])) Reflect.deleteProperty(newObj, k)
   })
+
   return newObj
 }
 
@@ -145,6 +161,7 @@ const removeStr = (str: string, config: { removeStart?: string; removeEnd?: stri
 }
 
 export default {
+  hashCacheKey,
   addCacheWrapper,
   abortablePromise,
   genSetRefObjFunc,

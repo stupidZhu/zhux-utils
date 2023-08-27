@@ -1,6 +1,6 @@
 {
   "name": "zhux-utils",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "",
   "module": "dist/index.js",
   "main": "dist/index.umd.js",
@@ -13,7 +13,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc && cross-env NODE_ENV=production rollup -c",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && cross-env NODE_ENV=production rollup -c",
     "test": "jest",
     "watch:rollup": "cross-env NODE_ENV=development rollup -w -c",
     "watch:ts": "tsc -w",

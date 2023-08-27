@@ -2,7 +2,7 @@
 order: 600
 ---
 
-# useStorageState
+# useStorageValue
 
 <code src="./demos/base.tsx"></code>
 
@@ -16,7 +16,7 @@ order: 600
 
 ## result
 
-| 数据/方法              | 说明              | 类型                                                                                                 |
-| :--------------------- | :---------------- | :--------------------------------------------------------------------------------------------------- |
-| storage (result[0])    | 存入 storage 的值 | `T`                                                                                                  |
-| setStorage (result[1]) | 修改 storage 的值 | `<K extends keyof T>(fieldKey: K \| Partial<T> \| ((v: T) => T), value?: T[K] \| undefined) => void` |
+| 数据/方法 | 说明              | 类型                                |
+| :-------- | :---------------- | :---------------------------------- |
+| result[0] | 存入 storage 的值 | `T`                                 |
+| result[1] | 修改 storage 的值 | `(val: T \| ((v: T) => T)) => void` |

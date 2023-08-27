@@ -7,12 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "build:site": "turbo run build --filter=zhux-site",
+    "build:gh-pages": "cross-env HOMEPAGE=/zhux-utils/ turbo run build --filter=zhux-site",
+    "build:vercel": "turbo run build --filter=zhux-site",
     "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "cross-env": "^7.0.3",
     "eslint-config-custom-ts": "workspace:*",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",

@@ -17,9 +17,8 @@ describe("StorageHelper", () => {
     storageHelper.setItem("HELLO", { hello: "hello" })
     expect(storageHelper.getItem("HELLO")).toEqual({ hello: "hello" })
 
-    // ? 搞不懂为什么会失败
-    // storageHelper.removeItem("HEllO")
-    // expect(storageHelper.getItem("HELLO")).toBeNull()
+    storageHelper.removeItem("HELLO")
+    expect(storageHelper.getItem("HELLO")).toBeNull()
 
     storageHelper.setItem("A", "a")
     storageHelper.clear()
@@ -27,12 +26,12 @@ describe("StorageHelper", () => {
   })
 
   test("和 localStorage 的兼容性", () => {
-    localStorage.setItem("HELLO", JSON.stringify({ hello: "HELLO" }))
-    localStorage.setItem("TEST_HELLO", JSON.stringify({ hello: "TEST_HELLO" }))
-    localStorage.setItem("TEST_HELLO_EXP", JSON.stringify({ hello: "TEST_HELLO_EXP", _expire: [1] }))
+    localStorage.setItem("HELLO", JSON.stringify({ data: { hello: "HELLO" }, _expire: Number.MAX_SAFE_INTEGER }))
+    localStorage.setItem("TEST_HELLO", JSON.stringify({ data: { hello: "TEST_HELLO" }, _expire: Number.MAX_SAFE_INTEGER }))
+    localStorage.setItem("TEST_HELLO_EXP", JSON.stringify({ data: { hello: "TEST_HELLO_EXP" }, _expire: [1] }))
 
-    expect(storageHelper.getItem("HELLO")).toBe(JSON.stringify({ hello: "TEST_HELLO" }))
-    expect(storageHelper.getItem("HELLO_EXP")).toBe(JSON.stringify({ hello: "TEST_HELLO_EXP", _expire: [1] }))
+    expect(storageHelper.getItem("HELLO")).toEqual({ hello: "TEST_HELLO" })
+    expect(storageHelper.getItem("HELLO_EXP")).toBeNull()
   })
 
   test("过期时间", () => {
@@ -51,5 +50,26 @@ describe("StorageHelper", () => {
 
     jest.advanceTimersByTime(59 * 1000)
     expect(storageHelper.getItem("EXP_1M")).toBeNull()
+  })
+
+  test("keys 和 clear", () => {
+    const storageHelper1 = new StorageHelper("TEST1")
+
+    storageHelper.setItem("A", 1)
+    storageHelper.setItem("B", 2)
+    storageHelper1.setItem("C", 3)
+    storageHelper1.setItem("D", 4)
+
+    expect(storageHelper.keys()).toEqual(["A", "B"])
+    expect(storageHelper.keys(true)).toEqual(["TEST_A", "TEST_B"])
+    expect(localStorage.length).toBe(4)
+
+    storageHelper.clear()
+    expect(storageHelper.keys()).toEqual([])
+    expect(storageHelper1.keys(true)).toEqual(["TEST1_C", "TEST1_D"])
+    expect(localStorage.length).toBe(2)
+
+    storageHelper1.clear()
+    expect(localStorage.length).toBe(0)
   })
 })

@@ -22,9 +22,9 @@ const StorageHelperComp = () => {
       <button
         onClick={() => {
           storageHelper.setItem("HELLO", { hello: "hello" })
-          storageHelper.removeItem("HELLO")
+          storageHelper.removeItem("HEllO")
+          console.log(storageHelper.getItem("HELLO"))
           console.log(storageHelper.key(0))
-          // console.log(storageHelper.getItem("HELLO"))
         }}
       >
         testRemove

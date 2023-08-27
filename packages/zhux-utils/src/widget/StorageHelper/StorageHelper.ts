@@ -17,12 +17,20 @@ class StorageHelper implements Storage {
     return this._storage.length
   }
 
-  clear = () => {
-    this._storage.clear()
-  }
-
   key = (index: number) => {
     return this._storage.key(index)
+  }
+
+  keys = (withPrefix = false) => {
+    let rawKeys = Object.keys(this._storage).filter(key => key.startsWith(this._prefix))
+    if (!withPrefix) rawKeys = rawKeys.map(key => key.replace(this._prefix, ""))
+    return rawKeys
+  }
+
+  clear = () => {
+    this.keys(true).forEach(key => {
+      this._storage.removeItem(key)
+    })
   }
 
   removeItem = (key: string) => {

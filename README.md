@@ -1,67 +1,25 @@
-# Turborepo starter
+### 基本使用
 
-This is an official pnpm starter turborepo.
+1. `pnpm i` 安装依赖
+2. 执行 zhux-site 的 dev 脚本
 
-## What's inside?
+## Git commit 规范
 
-This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
+|   前缀   |                                                   en                                                   |                          desc                          |
+| :------: | :----------------------------------------------------------------------------------------------------: | :----------------------------------------------------: |
+|  build   |                        changes affecting build systems or external dependencies                        | 编译相关的修改，例如发布版本、对项目构建或者依赖的改动 |
+|  chore   |                          updating grunt tasks etc.; no production code change                          |   其他修改, 比如改变构建流程、或者增加依赖库、工具等   |
+|    ci    |            updating configuration files for continuous integration and deployment services             |                      持续集成修改                      |
+|   docs   |                                       documentation-only changes                                       |                        文档修改                        |
+|   feat   |                                             a new feature                                              |                     新特性、新功能                     |
+|   fix    |                                               a bug fix                                                |                        修改 bug                        |
+|   perf   |                                a code change that improves performance                                 |              优化相关，比如提升性能、体验              |
+| refactor |                       a code change that neither fixes a bug nor adds a feature                        |                        代码重构                        |
+|  revert  |                                                 revert                                                 |                    回滚到上一个版本                    |
+|  style   | changes that do not affect the meaning of the code (white-space, formatting, missing semicolons, etc.) |            代码格式修改, 注意不是 css 修改             |
+|   test   |                           adding missing tests or correcting existing tests                            |                      测试用例修改                      |
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm run build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm run dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-pnpm dlx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-pnpm dlx turbo link
-```
-
-## Useful Links
+## [Turborepo](https://turbo.build/repo/docs) Useful Links
 
 Learn more about the power of Turborepo:
 

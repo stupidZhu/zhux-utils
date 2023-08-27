@@ -1,14 +1,6 @@
 {
   "extends": "tsconfig/react.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "declarationDir": "dist"
-  },
-  "include": [
-    "src",
-  ],
-  "exclude": [
-    "dist",
-    "src/**/__test__",
-  ]
+  "compilerOptions": {},
+  "include": ["src"],
+  "exclude": ["dist"]
 }

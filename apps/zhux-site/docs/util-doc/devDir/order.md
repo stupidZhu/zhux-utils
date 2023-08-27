@@ -13,7 +13,7 @@ hide: true
 | useDateTime        | 300   |
 | useAsyncMemo       | 400   |
 | useStoreState      | 500   |
-| useStorageState    | 600   |
+| useStorageStore    | 600   |
 | useCtrlComponent   | 700   |
 | usePagination      | 800   |
 | useDialog          | 900   |

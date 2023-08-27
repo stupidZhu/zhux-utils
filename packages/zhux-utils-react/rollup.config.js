@@ -20,7 +20,7 @@ export default [
       autoExternal(),
       resolve(),
       commonjs(),
-      esBuild(),
+      esBuild({ tsconfig: "tsconfig.build.json" }),
       copy({
         targets: [
           { src: "src/type", dest: "dist" },

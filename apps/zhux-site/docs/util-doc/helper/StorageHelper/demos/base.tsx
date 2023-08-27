@@ -3,17 +3,18 @@
  * desc: 带过期时间，自定义前缀，可保存任意类型的 StorageHelper
  */
 
-import React, { useRef } from "react"
+import React from "react"
 import { StorageHelper } from "zhux-utils"
 
+const storageHelper = new StorageHelper("ZX")
+
 const BaseDemo = () => {
-  const { current: storageHelper } = useRef(new StorageHelper("ZX"))
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div className="btn-wrapper">
       <button onClick={() => storageHelper.setItem("ITEM1", { hello: "item1" })}>添加一项</button>
       <button onClick={() => console.log(storageHelper.getItem("ITEM1"))}>打印 ITEM1</button>
       <button onClick={() => storageHelper.setItem("ITEM2", { hello: "item2" }, { seconds: 10 })}>
-        并设置过期时间（10s）
+        添加ITEM2并设置过期时间（10s）
       </button>
       <button onClick={() => console.log(storageHelper.getItem("ITEM2"))}>打印 ITEM2（10s后再试试）</button>
       <button
