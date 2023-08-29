@@ -34,10 +34,6 @@ build
 dist
 
 # dumi
-.umi
-.umi-production
-.env.local
-
 .dumi/tmp
 .dumi/tmp-production
 

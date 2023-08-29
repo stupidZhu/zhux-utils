@@ -16,7 +16,7 @@
     "build": "rimraf dist && tsc -p tsconfig.build.json && cross-env NODE_ENV=production rollup -c",
     "test": "jest",
     "watch:rollup": "cross-env NODE_ENV=development rollup -w -c",
-    "watch:ts": "tsc -w",
+    "watch:ts": "tsc -p tsconfig.build.json -w",
     "watch": "run-p watch:ts watch:rollup",
     "publish": "pnpm publish"
   },

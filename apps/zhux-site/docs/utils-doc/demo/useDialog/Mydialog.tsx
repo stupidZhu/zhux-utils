@@ -1,5 +1,6 @@
+import { useMemoizedFn } from "ahooks"
 import React, { useRef } from "react"
-import { useDialog } from "zhux-utils-react"
+import { useDialog, useDialogV2 } from "zhux-utils-react"
 import { DialogMoveCb, DialogResizeCb, IPosition } from "zhux-utils-react/dist/hook/useDialog/useDialog"
 import { WithChildren } from "zhux-utils-react/dist/type"
 import "./index.scss"
@@ -57,6 +58,56 @@ export const MyDialogB: React.FC<{ close: () => void; position?: IPosition } & W
       </div>
       <div className="use-dialog-content">{children}</div>
       {/* <div className="resize-field" ref={resizeFieldRef}></div> */}
+    </div>
+  )
+}
+
+export const MyDialogV2: React.FC<
+  { close: () => void; position?: IPosition; moveCb?: DialogMoveCb; resizeCb?: DialogResizeCb } & WithChildren
+> = ({ close, position = { left: 0, top: 0 }, moveCb: _moveCb, resizeCb: _resizeCb, children }) => {
+  const changingRef = useRef(false)
+
+  const moveCb: DialogMoveCb = useMemoizedFn(props => {
+    if (props.type === "moving") changingRef.current = true
+    else if (props.type === "moveEnd") setTimeout(() => (changingRef.current = false))
+    _moveCb?.(props)
+  })
+
+  const resizeCb: DialogResizeCb = useMemoizedFn(props => {
+    if (props.type === "resizing") changingRef.current = true
+    else if (props.type === "resizeEnd") setTimeout(() => (changingRef.current = false))
+    _resizeCb?.(props)
+  })
+
+  const { setRef } = useDialogV2({ moveCb, resizeCb })
+
+  return (
+    <div className="use-dialog dialog-a" ref={node => setRef(node, "dialog")} style={{ ...position }}>
+      <div
+        className="move-field"
+        ref={node => setRef(node, "moveHandler")}
+        onClick={() => {
+          if (!changingRef.current) console.log("hello")
+        }}
+      >
+        <button
+          onClick={e => {
+            e.stopPropagation()
+            close()
+          }}
+        >
+          x
+        </button>
+      </div>
+      <div className="use-dialog-content">{children}</div>
+      <span className="desc">鼠标移动到此处 resize -&gt;</span>
+      <div
+        className="resize-field"
+        ref={node => setRef(node, "resizeHandler")}
+        onClick={() => {
+          if (!changingRef.current) console.log("world")
+        }}
+      ></div>
     </div>
   )
 }

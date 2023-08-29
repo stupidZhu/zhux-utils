@@ -11,7 +11,7 @@ export interface ClassStyle {
 export interface CommonComProps<T = any> extends ClassStyle {
   value?: T
   defaultValue?: T
-  onChange?: (value: T | ((T) => T), ...rest: any[]) => void
+  onChange?: (value: T, ...rest: any[]) => void
 }
 
 export as namespace ZhuxUtilReact

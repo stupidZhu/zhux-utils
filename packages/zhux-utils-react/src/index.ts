@@ -7,6 +7,7 @@ export { default as useCtrlComponent } from "./hook/useCtrlComponent/useCtrlComp
 export { default as useCustomFields } from "./hook/useCustomFields/useCustomFields"
 export { default as useDateTime } from "./hook/useDateTime/useDateTime"
 export { default as useDialog } from "./hook/useDialog/useDialog"
+export { default as useDialogV2 } from "./hook/useDialog/useDialogV2"
 export { default as usePagination } from "./hook/usePagination/usePagination"
 export { default as ScrollWrapper } from "./hook/useScrollUtil/ScrollWrapper"
 export { default as useScrollUtil } from "./hook/useScrollUtil/useScrollUtil"
