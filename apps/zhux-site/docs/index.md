@@ -2,7 +2,7 @@
 title: hello zhux !
 hero:
   title: ZHUX
-  description: A static site based on dumi
+  description: hello zhux !
   actions:
     - text: Doc
       link: utils-doc/use-watch-effect

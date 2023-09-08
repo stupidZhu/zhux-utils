@@ -34,6 +34,6 @@ build
 dist
 
 # dumi
-.dumi/tmp
-.dumi/tmp-production
+**/.dumi/tmp
+**/.dumi/tmp-production
 
