@@ -19,7 +19,7 @@ const useCtrlComponent = <T = any>(props: IObj, options: UseCtrlComponentOptions
   } = options
 
   const isCtrl = useMemo(() => props.hasOwnProperty(valuePropName), [props, valuePropName])
-  const [_value, _onChange] = useState<T>(props[defaultValuePropName] ?? defaultValue)
+  const [_value, _onChange] = useState<T>(props[valuePropName] ?? props[defaultValuePropName] ?? defaultValue)
   const valueRef = useRef<T>(_value)
   const value: T = useMemo(() => (isCtrl ? props[valuePropName] : _value), [_value, isCtrl, props, valuePropName])
 

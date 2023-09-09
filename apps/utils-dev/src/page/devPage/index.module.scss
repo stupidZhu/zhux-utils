@@ -1,20 +1,26 @@
 @import "src/style";
 
 .customField {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   .fieldItem {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 10px;
-    border: 1px solid transparent;
+    border: 1px solid rgba(#000, 0.1);
+    border-radius: 5px;
     pointer-events: none;
     &.editing {
       border-color: rgba($theme-green, 0.5);
       pointer-events: auto;
     }
-    :global {
-      .iconfont {
-        cursor: pointer;
+    i {
+      pointer-events: auto;
+      cursor: pointer;
+      &:hover {
+        color: skyblue;
       }
     }
   }

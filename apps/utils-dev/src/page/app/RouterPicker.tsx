@@ -1,6 +1,6 @@
 import { Select } from "antd"
 import { useNavigate } from "react-router-dom"
-import routerOptions from "./data"
+import routerOptions from "../../router/data"
 
 const RouterPicker = () => {
   const navigate = useNavigate()

@@ -1,4 +1,3 @@
-import "antd/dist/antd.css"
 import ReactDOM from "react-dom/client"
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { ConfigProvider as ZhuxUtilConfigProvider } from "zhux-utils-react"

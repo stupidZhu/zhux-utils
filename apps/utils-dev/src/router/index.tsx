@@ -1,6 +1,6 @@
 import { RouteObject } from "react-router-dom"
 import App from "../page/app/App"
-import routerOptions from "../page/app/data"
+import routerOptions from "./data"
 
 export const routeList: RouteObject[] = [
   {

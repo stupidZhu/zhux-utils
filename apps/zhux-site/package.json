@@ -10,25 +10,26 @@
   "license": "MIT",
   "devDependencies": {
     "@types/lodash": "^4.14.185",
-    "@types/react-transition-group": "^4.4.5",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
+    "@types/react-transition-group": "^4.4.5",
+    "dumi": "^2.2.0",
     "eslint": "^8.24.0",
     "eslint-config-custom-react": "workspace:*",
-    "tsconfig": "workspace:*",
+    "prettier": "^2.7.1",
     "stylelint": "^14.12.1",
     "stylelint-config-custom": "*",
-    "dumi": "^2.2.0",
-    "prettier": "^2.7.1"
+    "tsconfig": "workspace:*"
   },
   "dependencies": {
     "ahooks": "^3.7.0",
+    "antd": "^5.9.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.5",
     "lodash": "^4.17.21",
-    "react-transition-group": "^4.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-transition-group": "^4.4.5",
     "zhux-utils": "workspace:*",
     "zhux-utils-react": "workspace:*"
   }

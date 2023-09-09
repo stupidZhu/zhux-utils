@@ -1,42 +1,27 @@
 @import "docs/utils-doc/style";
-.custom-fields-demo {
+
+.custom-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   .field-item {
     display: flex;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
     padding: 10px;
-    border: 1px solid transparent;
+    border: 1px solid rgba(#000, 0.1);
+    border-radius: 5px;
     pointer-events: none;
     &.editing {
       border-color: rgba($theme-green, 0.5);
       pointer-events: auto;
     }
-    > select {
-      height: 30px;
-      padding: 0 10px;
-    }
-    > input {
-      box-sizing: border-box;
-      width: 150px;
-      height: 30px;
-      outline: none;
-    }
-    > button {
-      height: 30px;
-    }
-    > i {
-      font-size: 1.5em;
-      cursor: pointer;
+    i {
       pointer-events: auto;
-      color: #666;
+      cursor: pointer;
       &:hover {
-        color: $theme-blue;
+        color: skyblue;
       }
     }
-  }
-  > button {
-    height: 30px;
-    padding: 0 30px;
-    margin-right: 10px;
   }
 }

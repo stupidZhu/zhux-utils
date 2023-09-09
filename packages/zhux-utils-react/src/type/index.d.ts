@@ -8,10 +8,12 @@ export interface ClassStyle {
   style?: React.CSSProperties
 }
 
-export interface CommonComProps<T = any> extends ClassStyle {
+export interface CtrlProps<T = unknown> {
   value?: T
   defaultValue?: T
   onChange?: (value: T, ...rest: any[]) => void
 }
+
+export type CommonComProps<T = any> = CtrlProps<T> & ClassStyle
 
 export as namespace ZhuxUtilReact

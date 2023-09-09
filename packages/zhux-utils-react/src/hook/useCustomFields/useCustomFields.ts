@@ -1,51 +1,61 @@
+import { useMemoizedFn } from "ahooks"
 import { cloneDeep } from "lodash"
-import { useCallback } from "react"
-import { IKey, IObj } from "zhux-utils/dist/type"
-import { CommonComProps } from "../../type"
+import { IObj } from "zhux-utils/dist/type"
+import { CtrlProps } from "../../type"
 import useMemoValue from "../memo/useMemoValue"
 import useCtrlComponent from "../useCtrlComponent/useCtrlComponent"
+import {
+  ChangeFieldInfo,
+  addField as _addField,
+  delField as _delField,
+  editField as _editField,
+  validate as _validate,
+} from "./util"
 
-export type ChangeFieldFunc<T = any> = (changeType: "edit" | "del" | "add", value?: T & { _key?: IKey }) => IKey | undefined
-
-interface UseCustomFieldsProps<T extends IObj>
-  extends Omit<CommonComProps<Array<T & { _key: IKey }>>, "className" | "style"> {
-  templateItem: T
-  addType?: "push" | "unshift"
+export interface UseCustomFieldsProps<T extends IObj> extends CtrlProps<T[]> {
+  templateItem: Partial<T>
+  keyName?: string
+  validateItem?: (item: Partial<T>) => boolean
+  onAction?: (info: ChangeFieldInfo<T>) => void
 }
 
 const useCustomFields = <T extends IObj = any>(props: UseCustomFieldsProps<T>) => {
-  const { templateItem: item, addType = "push" } = props
-  const [fields, setFields] = useCtrlComponent<Array<T & { _key: IKey }>>(props, { defaultValue: [] })
-
+  const { templateItem: item, validateItem, keyName = "id", onAction } = props
+  const [fields, setFields] = useCtrlComponent<T[]>(props, { defaultValue: [] })
   const templateItem = useMemoValue(item)
 
-  const changeField: ChangeFieldFunc<T> = useCallback(
-    (changeType, value) => {
-      const _fields = [...fields]
-      let key: IKey | undefined = undefined
+  const addField = useMemoizedFn((value?: Partial<T>, addFunc: "push" | "unshift" = "push") => {
+    const template = cloneDeep(templateItem)
+    setFields(rawFields => {
+      const [fields, info] = _addField({ rawFields, value, keyName, template, addFunc, validateItem })
+      onAction?.(info)
+      return fields
+    })
+  })
 
-      if (changeType === "add") {
-        const v: any = value ?? cloneDeep(templateItem)
-        if (!v._key) v._key = Date.now() + Math.random()
-        _fields[addType](v)
-        key = v._key
-      } else {
-        if (!value?._key) return
-        const index = _fields.findIndex(item => item._key === value._key)
-        if (index === -1) return
+  const editField = useMemoizedFn((value: Partial<T>, merge?: boolean) => {
+    setFields(rawFields => {
+      const [fields, info] = _editField({ rawFields, value, keyName, merge })
+      onAction?.(info)
+      return fields
+    })
+  })
 
-        if (changeType === "del") _fields.splice(index, 1)
-        else _fields[index] = value as T & { _key: IKey }
+  const delField = useMemoizedFn((value: Partial<T>) => {
+    setFields(rawFields => {
+      const [fields, info] = _delField({ rawFields, value, keyName })
+      onAction?.(info)
+      return fields
+    })
+  })
 
-        key = value._key
-      }
-      setFields(_fields)
-      return key
-    },
-    [addType, fields, templateItem]
-  )
+  // include 优先级高于 exclude
+  const validate = useMemoizedFn((include?: T[], exclude?: T[]) => {
+    const info = _validate({ fields, include, exclude, validateItem })
+    onAction?.(info)
+  })
 
-  return [fields, changeField] as const
+  return { fields, setFields, addField, editField, delField, validate }
 }
 
 export default useCustomFields
