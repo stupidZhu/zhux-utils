@@ -2,7 +2,7 @@
 nav: Doc
 toc: content
 group:
-  title: zhux-utils
+  title: utils
   order: 1
 ---
 

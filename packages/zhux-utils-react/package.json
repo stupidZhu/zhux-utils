@@ -1,6 +1,6 @@
 {
   "name": "zhux-utils-react",
-  "version": "0.1.10",
+  "version": "0.1.12",
   "description": "",
   "module": "dist/index.js",
   "main": "dist/index.umd.js",
@@ -17,8 +17,7 @@
     "test": "jest",
     "watch:rollup": "cross-env NODE_ENV=development rollup -w -c",
     "watch:ts": "tsc -p tsconfig.build.json -w",
-    "watch": "run-p watch:ts watch:rollup",
-    "publish": "pnpm publish"
+    "watch": "run-p watch:ts watch:rollup"
   },
   "keywords": [],
   "author": "",

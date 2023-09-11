@@ -1,11 +1,12 @@
+import { Button, Form } from "antd"
 import React, { useState } from "react"
-import { CommonComProps } from "zhux-utils-react/dist/type"
-import useCtrlComponent from "./useCtrlComponent"
+import { useCtrlComponent } from "zhux-utils-react"
+import { CtrlProps } from "zhux-utils-react/dist/type"
+import { MultiInput, MultiNumber } from "./MultiInputs"
 
-interface CounterProps extends CommonComProps<number> {}
+interface CounterProps extends CtrlProps<number> {}
 
 const Counter: React.FC<CounterProps> = props => {
-  // const [value, onChange] = useControllableValue<number>(props, { defaultValue: 0 })
   const [value, onChange] = useCtrlComponent<number>(props, { defaultValue: 0 })
 
   return (
@@ -33,7 +34,23 @@ const Counter: React.FC<CounterProps> = props => {
 
 const CtrlComponent = () => {
   const [value, onChange] = useState(0)
-  return <Counter value={value} onChange={(v, ...rest) => {}} />
+  return (
+    <>
+      <Counter value={value} onChange={onChange} />
+      <br />
+      <Counter />
+      <br />
+      <Form onFinish={console.log}>
+        <Form.Item name="multiInput" label="multiInput">
+          <MultiInput />
+        </Form.Item>
+        <Form.Item name="multiNumber" label="multiNumber">
+          <MultiNumber />
+        </Form.Item>
+        <Button htmlType="submit">submit</Button>
+      </Form>
+    </>
+  )
 }
 
 export default CtrlComponent

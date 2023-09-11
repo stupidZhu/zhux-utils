@@ -9,6 +9,7 @@ export default defineConfig({
     socialLinks: {
       github: "https://github.com/stupidZhu/zhux-utils",
     },
+    lastUpdated: false,
   },
   styles: ["//at.alicdn.com/t/font_2346762_78tfqsq57sm.css"],
   base: home,

@@ -48,16 +48,16 @@ describe("useCtrlComponent", () => {
   })
 
   test("受控模式", () => {
-    let initialValue = {
-      value: 1,
+    let initialValue: { value?: number; onChange: (v: number) => void } = {
       onChange(val: number) {
         this.value = val
       },
     }
 
-    const { result, rerender } = renderHook(({ initialValue }) => useCtrlComponent<number>(initialValue), {
-      initialProps: { initialValue },
-    })
+    const { result, rerender } = renderHook(
+      ({ initialValue }) => useCtrlComponent<number>(initialValue, { defaultValue: 1 }),
+      { initialProps: { initialValue } }
+    )
     const onChange = result.current[1]
 
     expect(result.current[0]).toBe(1)

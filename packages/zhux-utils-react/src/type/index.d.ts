@@ -16,4 +16,6 @@ export interface CtrlProps<T = unknown> {
 
 export type CommonComProps<T = any> = CtrlProps<T> & ClassStyle
 
+export type OmitCtrlProps<T extends IObj, K extends keyof T = ""> = Omit<T, keyof CtrlProps | K>
+
 export as namespace ZhuxUtilReact

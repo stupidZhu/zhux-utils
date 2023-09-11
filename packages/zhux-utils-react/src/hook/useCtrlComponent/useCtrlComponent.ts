@@ -21,7 +21,7 @@ const useCtrlComponent = <T = any>(props: IObj, options: UseCtrlComponentOptions
   const isCtrl = useMemo(() => props.hasOwnProperty(valuePropName), [props, valuePropName])
   const [_value, _onChange] = useState<T>(props[valuePropName] ?? props[defaultValuePropName] ?? defaultValue)
   const valueRef = useRef<T>(_value)
-  const value: T = useMemo(() => (isCtrl ? props[valuePropName] : _value), [_value, isCtrl, props, valuePropName])
+  const value: T = useMemo(() => props[valuePropName] ?? _value, [_value, props, valuePropName])
 
   const onChange = useMemoizedFn((newValue: T | ((val: T) => T), ...rest: any[]) => {
     const res = typeof newValue === "function" ? (newValue as Function)(valueRef.current) : newValue
